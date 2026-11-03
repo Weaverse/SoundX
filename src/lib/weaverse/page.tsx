@@ -8,26 +8,21 @@ import {
 } from "@weaverse/next";
 
 import { WEAVERSE_COMPONENTS } from "./components";
-
-type ClientOptions = NonNullable<
-  Parameters<typeof createWeaverseNextClient>[0]
->;
+import { clientRequestContext } from "./request-context";
 
 type WeaversePageProps = {
     data: WeaverseNextLoaderData;
     projectId: string,
-    requestContext:  ClientOptions["requestContext"];
 }
 
 export function WeaversePage({
     data,
     projectId,
-    requestContext
 }: WeaversePageProps) {
     const client = createWeaverseNextClient({ // nhận danh sách component Tech biết render
         components: WEAVERSE_COMPONENTS,
         projectId,
-        requestContext
+        requestContext: clientRequestContext(data)
     })
 
     return (

@@ -1,5 +1,5 @@
 import { createWeaverseNextServerClient } from "@weaverse/next/server";
-import type { WeaverseNextComponent } from "@weaverse/next";
+import type { WeaverseNextComponent, WeaverseNextRequestContext } from "@weaverse/next";
 import * as TextBlock from "@/sections/text-block";
 
 
@@ -8,7 +8,7 @@ export function weaverseProjectId(): string | null {
   return projectId || null;
 }
 
-export function loadWeaverseHomePage() {
+export function loadWeaverseHomePage(requestContext: WeaverseNextRequestContext) {
   const projectId = weaverseProjectId();
 
   if(!projectId) {
@@ -17,6 +17,7 @@ export function loadWeaverseHomePage() {
 
   const client = createWeaverseNextServerClient({
     projectId,
+    requestContext,
     components: [
       {
         default: TextBlock.default as WeaverseNextComponent["default"],
