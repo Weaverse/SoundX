@@ -85,3 +85,23 @@ Protection Bypass evaluation is deferred; no Vercel settings were changed.
   tooling migration remain pending; this does not complete PR #10.
 - Prepared the documentation and TextBlock changes for an authorized local
   commit. No push or deployment is included.
+
+## 2026-11-05 — Server registry split completed
+
+- The developer added the schema-only list and server-only registry, then wired
+  `server.ts` to that registry instead of importing the TextBlock render module.
+- Kept the client registry's `"use client"` directive and `entry()` unchanged.
+- The server registry derives entries from `SECTION_SCHEMAS` with `NO_RENDER`.
+  TextBlock needs no loader; future data-backed sections attach theirs here.
+- Added three tests comparing client types/schema objects with the schema list
+  and rejecting duplicate types. These tests do not directly import the
+  server-only module or execute future loaders.
+- Inspected the server import chain: server client -> server registry -> schema
+  list -> TextBlock schema. It does not reach the client render registry.
+- `bun test tests`: 6 passed, 0 failed.
+- `bun run lint`: passed across the repository.
+- `bun run build`: passed with `.env.local`, including TypeScript validation.
+- The developer confirmed TextBlock display, direct selection, hover outline,
+  and heading editing still work in Studio after the registry change.
+- Marked step 3 complete. Environment/project identity remediation is next.
+- This step is prepared for a local commit; no push or deployment is included.

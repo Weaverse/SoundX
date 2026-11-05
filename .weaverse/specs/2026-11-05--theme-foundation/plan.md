@@ -46,13 +46,13 @@ Verification:
 
 ## 3. Client and Server Registries
 
-- [ ] Keep `"use client"` and `entry()` in the client render registry.
-- [ ] Add a schema-only list.
-- [ ] Add `server-components.ts` with `import "server-only"`.
-- [ ] Use a `NO_RENDER` default stub in the server registry.
-- [ ] Attach server loaders only where a section requires them.
-- [ ] Remove render-module imports from the server client setup.
-- [ ] Add registry consistency coverage.
+- [x] Keep `"use client"` and `entry()` in the client render registry.
+- [x] Add a schema-only list.
+- [x] Add `server-components.ts` with `import "server-only"`.
+- [x] Use a `NO_RENDER` default stub in the server registry.
+- [x] Attach server loaders only where a section requires them. TextBlock needs none.
+- [x] Remove render-module imports from the server client setup.
+- [x] Add registry consistency coverage.
 
 Verification:
 - Confirm client and server registrations contain matching section types.

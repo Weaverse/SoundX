@@ -41,6 +41,9 @@ unrelated storefront features are outside this change.
 
 - Next.js App Router and a Weaverse-rendered Home page are implemented.
 - TextBlock is registered with an editable heading.
+- Client rendering and server registration are separate. The server registry
+  derives its entries from a schema-only list and uses a non-rendering stub;
+  TextBlock does not require a server loader.
 - Server-to-client request context restoration is implemented.
 - Bun scripts and CI currently run lint, typecheck, and build.
 - Earlier verification reported successful local checks, a Shopify terminal

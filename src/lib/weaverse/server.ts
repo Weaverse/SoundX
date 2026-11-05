@@ -1,31 +1,29 @@
-import { createWeaverseNextServerClient } from "@weaverse/next/server";
-import type { WeaverseNextComponent, WeaverseNextRequestContext } from "@weaverse/next";
-import * as TextBlock from "@/sections/text-block";
+import "server-only";
 
+import type { WeaverseNextRequestContext } from "@weaverse/next";
+import { createWeaverseNextServerClient } from "@weaverse/next/server";
+
+import { WEAVERSE_SERVER_COMPONENTS } from "./server-components";
 
 export function weaverseProjectId(): string | null {
-  const projectId = process.env.WEAVERSE_PROJECT_ID?.trim();
+  let projectId = process.env.WEAVERSE_PROJECT_ID?.trim();
   return projectId || null;
 }
 
-export function loadWeaverseHomePage(requestContext: WeaverseNextRequestContext) {
-  const projectId = weaverseProjectId();
+export function loadWeaverseHomePage(
+  requestContext: WeaverseNextRequestContext,
+) {
+  let projectId = weaverseProjectId();
 
-  if(!projectId) {
-    return null
+  if (!projectId) {
+    return null;
   }
 
-  const client = createWeaverseNextServerClient({
+  let client = createWeaverseNextServerClient({
     projectId,
     requestContext,
-    components: [
-      {
-        default: TextBlock.default as WeaverseNextComponent["default"],
-        schema: TextBlock.schema,
-      },
-],
-  })
+    components: WEAVERSE_SERVER_COMPONENTS,
+  });
 
-  return client.loadPage({type:'INDEX'})
+  return client.loadPage({ type: "INDEX" });
 }
-
