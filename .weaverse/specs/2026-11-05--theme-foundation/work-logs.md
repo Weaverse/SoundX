@@ -105,3 +105,57 @@ Protection Bypass evaluation is deferred; no Vercel settings were changed.
   and heading editing still work in Studio after the registry change.
 - Marked step 3 complete. Environment/project identity remediation is next.
 - This step is prepared for a local commit; no push or deployment is included.
+
+## 2026-11-05 — SDK environment helper tests
+
+- Added four tests using synthetic configuration only: explicit empty keys,
+  trimming and API-base suppression, private/unrelated key exclusion, and
+  frozen output. No real environment credentials were read by these tests.
+- `bun test tests/weaverse-env.test.ts`: 4 passed, 0 failed.
+- `bun run typecheck`: passed.
+- Focused ESLint on `env.ts` and `weaverse-env.test.ts`: passed.
+- Step 4 remains in progress: installed SDK key coverage, project-id precedence,
+  full integration checks, and Studio verification are still pending.
+
+## 2026-11-05 — Installed SDK environment key coverage
+
+- Inspected the installed `@weaverse/next` 1.0.1 server bundle's `readEnv` calls.
+- Added a regression test comparing `SDK_ENV_KEYS` with literal `readEnv(env,
+  key)` calls in both the ESM and CommonJS server bundles. The comparison rejects
+  missing and stale keys, and fails if no calls are found after a bundle refactor.
+- All five configured keys match the installed SDK. This source inspection is
+  tied to the package's current bundle structure; a changed or dynamic env-read
+  implementation needs review when upgrading the SDK.
+- Env suite: 5 passed, 0 failed. Typecheck and focused test-file lint passed.
+- Project-id precedence and final integration checks remain pending.
+
+## 2026-11-05 — Client project identity verification
+
+- Added three tests exercising `WeaversePage` with synthetic payloads and
+  inspecting the real client passed to `WeaverseNextProvider`. Configs metadata
+  wins over project metadata, which wins over the configured fallback.
+- The tests do not mount Studio or call a remote API. No runtime helper was
+  added solely to expose the selection expression to tests.
+- Confirmed `.env.example` documents the public token with an empty value and
+  README distinguishes public Studio configuration from private server reads.
+- `bun test tests`: 14 passed, 0 failed across four files.
+- `bun run typecheck`, full-repository lint, and production build passed.
+- Studio re-verification and public-token configuration confirmation are pending
+  the developer's response. Step 4 is not yet recorded as complete or committed.
+
+## 2026-11-05 — Environment and project identity step completed
+
+- The developer confirmed all Studio interactions work after step 4, then added
+  the public Storefront token locally and confirmed section edits update the
+  local preview at port 3001. This is developer-reported integration evidence.
+- Rebuilt after the local configuration update: production build and its
+  TypeScript validation passed. Credentials were not printed or staged.
+- The preceding 14 tests, full lint, and standalone typecheck passed; runtime
+  code has not changed since those checks.
+- Confirmed `.env.example` contains empty values only. The local `.env.local`
+  file is excluded from the commit.
+- Marked step 4 complete. Request context and page-loading remediation is next.
+- Public token API validity/resource-picker behavior was not independently
+  queried; successful heading editing alone does not establish token validity.
+- Prepared only review-related env/project identity code, tests, setup docs,
+  and spec updates for the authorized local commit. No push is included.

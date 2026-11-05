@@ -46,9 +46,10 @@ project. Obtain credentials through the team's approved channel.
 
 | Variable | Purpose |
 | --- | --- |
-| WEAVERSE_PROJECT_ID | Project used by the Home page loader. |
+| WEAVERSE_PROJECT_ID | Default Weaverse project; the client prefers the project id from the server payload. |
 | PUBLIC_STORE_DOMAIN | Demo store's myshopify.com domain. |
-| PRIVATE_STOREFRONT_API_TOKEN | Server-only Storefront token, verified through a terminal catalog query. Shopify application integration is still pending. |
+| PUBLIC_STOREFRONT_API_TOKEN | Public Storefront token supplied to Weaverse Studio for resource selection. |
+| PRIVATE_STOREFRONT_API_TOKEN | Private Storefront token reserved for server-side Shopify queries. Application integration is planned in the foundation spec. |
 
 Keep real values in `.env.local`, which Git ignores. Commit variable names
 and empty values in `.env.example`. Restart the dev server after changing

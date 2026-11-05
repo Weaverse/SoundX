@@ -45,6 +45,9 @@ unrelated storefront features are outside this change.
   derives its entries from a schema-only list and uses a non-rendering stub;
   TextBlock does not require a server loader.
 - Server-to-client request context restoration is implemented.
+- The server passes explicit SDK environment keys and excludes private Shopify
+  credentials. The client prefers the server payload's project identity before
+  the configured fallback; the environment project gate remains in place.
 - Bun scripts and CI currently run lint, typecheck, and build.
 - Earlier verification reported successful local checks, a Shopify terminal
   query, and heading updates in Studio. These have not been rerun as part

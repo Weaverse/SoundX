@@ -1,5 +1,5 @@
 import "server-only";
-
+import { buildSdkEnv } from "./env";
 import type { WeaverseNextRequestContext } from "@weaverse/next";
 import { createWeaverseNextServerClient } from "@weaverse/next/server";
 
@@ -19,7 +19,10 @@ export function loadWeaverseHomePage(
     return null;
   }
 
+  let sdkEnv = buildSdkEnv(process.env);
+
   let client = createWeaverseNextServerClient({
+    env: sdkEnv,
     projectId,
     requestContext,
     components: WEAVERSE_SERVER_COMPONENTS,

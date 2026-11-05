@@ -62,13 +62,13 @@ Verification:
 
 ## 4. Environment and Project Identity
 
-- [ ] Add an explicit Weaverse environment helper.
-- [ ] Cover every environment key read by the installed SDK.
-- [ ] Supply explicit empty values for absent or suppressed SDK keys.
-- [ ] Keep private Shopify credentials out of the SDK environment object.
-- [ ] Add `PUBLIC_STOREFRONT_API_TOKEN` to `.env.example` and setup docs.
-- [ ] Keep the environment project gate.
-- [ ] Prefer the payload project id on the client, with a configured fallback.
+- [x] Add an explicit Weaverse environment helper.
+- [x] Cover every environment key read by the installed SDK.
+- [x] Supply explicit empty values for absent or suppressed SDK keys.
+- [x] Keep private Shopify credentials out of the SDK environment object.
+- [x] Add `PUBLIC_STOREFRONT_API_TOKEN` to `.env.example` and setup docs.
+- [x] Keep the environment project gate.
+- [x] Prefer the payload project id on the client, with a configured fallback.
 
 Verification:
 - Test missing and configured project ids.
