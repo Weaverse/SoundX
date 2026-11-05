@@ -79,16 +79,16 @@ Verification:
 
 ## 5. Request Context and Page Loading
 
-- [ ] Extract pure `buildRequestContext()` into `request-info.ts`.
-- [ ] Preserve repeated query values, pathname, page type, handle, and locale.
-- [ ] Avoid a trailing `?` when the query is empty.
-- [ ] Keep the HTTP protocol fallback from the corrected review.
-- [ ] Replace the Home-specific loader with `loadWeaversePage()`.
-- [ ] Mark the server integration module with `import "server-only"`.
-- [ ] Catch page-loading failures and return `null`.
-- [ ] Translate `null` into `notFound()` in the route.
-- [ ] Add an error boundary for otherwise unhandled application errors.
-- [ ] Remove hardcoded shopper-facing fallback copy from the Home route.
+- [x] Extract pure `buildRequestContext()` into `request-info.ts`.
+- [x] Preserve repeated query values, pathname, page type, handle, and locale.
+- [x] Avoid a trailing `?` when the query is empty.
+- [x] Keep the HTTP protocol fallback from the corrected review.
+- [x] Replace the Home-specific loader with `loadWeaversePage()`.
+- [x] Mark the server integration module with `import "server-only"`.
+- [x] Catch page-loading failures and return `null`.
+- [x] Translate `null` into `notFound()` in the route.
+- [x] Add an error boundary for otherwise unhandled application errors.
+- [x] Remove hardcoded shopper-facing fallback copy from the Home route.
 
 Verification:
 - Test request identity, query arrays, URL construction, and locale.
@@ -188,6 +188,8 @@ list when scope changes.
 | Registry | `src/lib/weaverse/components.ts`, `server.ts` | `section-schemas.ts`, `server-components.ts` in the same directory |
 | Env and requests | `.env.example`, `src/lib/weaverse/request-context.ts` | `env.ts`, `request-info.ts` under `src/lib/weaverse/` |
 | Rendering | `src/lib/weaverse/page.tsx`, `src/app/page.tsx`, `layout.tsx` | `src/app/error.tsx`, optional `not-found.tsx` |
+| Error copy | — | `src/lib/i18n/static-content.ts` (English defaults; full translation deferred) |
+| Request/loader tests | — | `tests/weaverse-request.test.ts`, `tests/weaverse-server.test.ts`, `tests/fixtures/weaverse-server.mjs`, `tests/error-page.test.ts` |
 | Shopify | `package.json`, `bun.lock` | Minimal modules under `src/lib/storefront/` and `src/lib/storefront/shopify/` |
 | Tooling | `package.json`, `bun.lock`, `.github/workflows/ci.yml`, `next.config.ts` | `biome.json`, `src/lib/cn.ts`, focused tests and test configuration |
 | Cleanup | `README.md`, `.gitignore`, `src/app/globals.css`, unused `public/*.svg` | — |

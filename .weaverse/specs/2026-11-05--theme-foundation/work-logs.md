@@ -159,3 +159,31 @@ Protection Bypass evaluation is deferred; no Vercel settings were changed.
   queried; successful heading editing alone does not establish token validity.
 - Prepared only review-related env/project identity code, tests, setup docs,
   and spec updates for the authorized local commit. No push is included.
+
+## 2026-11-05 — Request context, loading, and error handling completed
+
+- Added pure query/context helpers preserving repeated query values, route type,
+  handle, headers, proxy origin, and locale. Empty queries add no trailing `?`;
+  the corrected review's HTTP fallback remains. No-host inputs retain a relative
+  path. Locale currently accepts an i18n object and defaults to US/English.
+- Replaced the Home-only loader with generic `loadWeaversePage()`. Server-side
+  configuration remains protected by `server-only`; loading failures and absent
+  data return `null`, and Home calls `notFound()` for unavailable composition.
+- Removed obsolete Home request-building code and shopper-facing fallback copy.
+- Added `error.tsx` with generic copy in `lib/i18n/static-content.ts` and the
+  installed Next 16.4.4 `retry` callback. It does not display/log raw exceptions.
+  This centralizes English defaults; it does not implement full translation.
+- Added query/context and client round-trip tests; loader tests run in isolated
+  child processes with synthetic configuration and mocked SDK/Next boundaries.
+  Covered successful data, absent configuration/page, undefined response,
+  header/client/fetch failures, and Home rendering versus `notFound()`.
+- Added a fallback component test confirming shared copy and retry delegation.
+  This is not a live browser test of error-boundary recovery.
+- One expanded test run initially failed because the navigation mock omitted SDK
+  imports. Preserved real navigation exports while overriding only `notFound`;
+  the corrected full suite passed: 31 tests, 0 failures across seven test files.
+- Typecheck, full lint, and production build with local env passed. The final
+  navigation-mock fix changed only test code; full tests and lint were rerun.
+- The developer confirmed standalone/Studio display, selection, hover outline,
+  and heading editing still work after the loader migration.
+- Step 5 is complete. Cache policy is next. No deployment or push is included.

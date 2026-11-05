@@ -45,6 +45,10 @@ unrelated storefront features are outside this change.
   derives its entries from a schema-only list and uses a non-rendering stub;
   TextBlock does not require a server loader.
 - Server-to-client request context restoration is implemented.
+- Server request context construction is now a tested pure helper. Home uses
+  the generic page loader and translates unavailable composition to `notFound()`.
+- A client error boundary uses centralized English fallback copy and Next's
+  retry callback. Full localization/theme-editable copy remains deferred.
 - The server passes explicit SDK environment keys and excludes private Shopify
   credentials. The client prefers the server payload's project identity before
   the configured fallback; the environment project gate remains in place.
