@@ -8,11 +8,14 @@ import {
 
 import { WeaversePage } from "../src/lib/weaverse/page";
 
-function projectIdPassedToProvider(data: WeaverseNextLoaderData): string | undefined {
+function projectIdPassedToProvider(
+  data: WeaverseNextLoaderData,
+): string | undefined {
   // Inspect the wrapper's returned element without mounting the SDK runtime.
-  let element = WeaversePage({ data, projectId: "configured-project" }) as ReactElement<
-    ComponentProps<typeof WeaverseNextProvider>
-  >;
+  let element = WeaversePage({
+    data,
+    projectId: "configured-project",
+  }) as ReactElement<ComponentProps<typeof WeaverseNextProvider>>;
 
   assert.equal(element.type, WeaverseNextProvider);
   assert.ok(element.props.client);

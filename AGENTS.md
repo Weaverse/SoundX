@@ -83,13 +83,11 @@ Internal maintainers must also read `.weaverse/AGENTS.md` when present.
 
 - Use Bun, pinned by `packageManager` in `package.json`, and commit
   `bun.lock` when dependencies change.
-- Keep the application compatible with the project's Node.js runtime.
-- Biome is the target lint and format tool for the foundation review.
-  Until its migration is implemented, use the existing ESLint script.
-- Current checks are `bun run lint`, `bun run typecheck`, and `bun run build`.
-- When format and test scripts are added, run `bun run format:check` and
-  `bun run test` for the relevant changes.
-- Keep this guidance and CI synchronized with scripts that actually exist.
+- Keep the application compatible with Node.js 24, as configured in CI.
+- Use Biome for linting and formatting. Run `bun run format` to apply formatting.
+- Before committing, run `bun run format:check`, `bun run lint`,
+  `bun run typecheck`, `bun run test`, and `bun run build`.
+- Keep this guidance and CI synchronized with the scripts in `package.json`.
 - Add focused regression tests for Studio attributes, registry consistency,
   request context, and environment boundaries as those changes land.
 - Verify Studio selection, outline, and editing in the browser; a heading

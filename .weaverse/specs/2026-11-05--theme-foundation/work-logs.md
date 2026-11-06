@@ -218,3 +218,15 @@ Protection Bypass evaluation is deferred; no Vercel settings were changed.
   relative paths to Hydrogen's bundled schemas.
 - Typecheck including GraphQL validation, all 31 tests, lint, and production
   build passed. CI already calls typecheck.
+
+## 2026-11-06 — Tooling and code conventions
+
+- Replaced ESLint with Biome, formatted the repository, and added format and
+  test scripts to CI. Removed the duplicate feature-branch push trigger.
+- Added `cn()` for class composition and applied the local variable convention
+  in request context. Scaffold font and metadata cleanup remains in step 9.
+- Aligned Node types with CI, removed `ignoreScripts`, and updated the tooling
+  guidance in `AGENTS.md`.
+- Frozen install, format check, lint, all 31 tests, typecheck including GraphQL,
+  and the production build passed locally. The updated workflow has yet to run
+  on GitHub.

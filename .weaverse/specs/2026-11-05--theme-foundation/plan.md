@@ -129,17 +129,17 @@ Verification:
 
 ## 8. Tooling and Code Conventions
 
-- [ ] Add Biome configuration and dependency.
-- [ ] Replace ESLint scripts and remove unused ESLint dependencies/config.
-- [ ] Add `format` and `format:check`.
-- [ ] Add the focused test scripts needed by this foundation.
-- [ ] Add `src/lib/cn.ts` for conditional class composition.
-- [ ] Apply the requested let/ALL_CAPS-const convention to touched code.
-- [ ] Align Node types with the chosen runtime.
-- [ ] Remove unsupported `ignoreScripts`.
-- [ ] Keep dependencies, lockfile, guidance, and scripts consistent.
-- [ ] Add format and test checks to CI.
-- [ ] Remove the feature-branch push trigger that duplicates PR checks.
+- [x] Add Biome configuration and dependency.
+- [x] Replace ESLint scripts and remove unused ESLint dependencies/config.
+- [x] Add `format` and `format:check`.
+- [x] Add the focused test scripts needed by this foundation.
+- [x] Add `src/lib/cn.ts` for conditional class composition.
+- [x] Apply the requested let/ALL_CAPS-const convention to request context.
+- [x] Align Node types with the chosen runtime.
+- [x] Remove unsupported `ignoreScripts`.
+- [x] Keep dependencies, lockfile, guidance, and scripts consistent.
+- [x] Add format and test checks to CI.
+- [x] Remove the feature-branch push trigger that duplicates PR checks.
 
 Verification:
 - Run frozen-lockfile installation, lint, format check, tests, typecheck,

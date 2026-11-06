@@ -19,14 +19,17 @@ for (let key of [
 ]) {
   process.env[key] = "";
 }
-process.env.WEAVERSE_PROJECT_ID = mode === "unconfigured" ? "   " : "test-project";
+process.env.WEAVERSE_PROJECT_ID =
+  mode === "unconfigured" ? "   " : "test-project";
 process.env.PRIVATE_STOREFRONT_API_TOKEN = "synthetic-private-token";
 
 mock.module("server-only", () => ({}));
 let navigation = await import("next/navigation");
 mock.module("next/navigation", () => ({
   ...navigation,
-  notFound: () => { throw new Error("TEST_NOT_FOUND"); },
+  notFound: () => {
+    throw new Error("TEST_NOT_FOUND");
+  },
 }));
 mock.module("next/headers", () => ({
   headers: async () => {
@@ -40,12 +43,24 @@ mock.module("@weaverse/next/server", () => ({
     clientCalls++;
     assert.equal(options.projectId, "test-project");
     assert.equal(options.env.WEAVERSE_PROJECT_ID, "test-project");
-    assert.equal(Object.hasOwn(options.env, "PRIVATE_STOREFRONT_API_TOKEN"), false);
-    assert.equal(options.requestContext.url, routeCase
-      ? "https://shop.example/?color=black&color=white"
-      : "https://shop.example/products/headphones?color=black&color=white");
-    assert.equal(options.requestContext.handle, routeCase ? undefined : "headphones");
-    assert.deepEqual(options.components.map((entry) => entry.schema.type), ["text-block"]);
+    assert.equal(
+      Object.hasOwn(options.env, "PRIVATE_STOREFRONT_API_TOKEN"),
+      false,
+    );
+    assert.equal(
+      options.requestContext.url,
+      routeCase
+        ? "https://shop.example/?color=black&color=white"
+        : "https://shop.example/products/headphones?color=black&color=white",
+    );
+    assert.equal(
+      options.requestContext.handle,
+      routeCase ? undefined : "headphones",
+    );
+    assert.deepEqual(
+      options.components.map((entry) => entry.schema.type),
+      ["text-block"],
+    );
     if (mode === "client-error") throw new Error("Synthetic client failure");
     return {
       loadPage: async (input) => {
@@ -96,5 +111,11 @@ let data = await loadWeaversePage({
 
 assert.equal(data, scenario === "success" ? payload : null);
 assert.equal(headerCalls, scenario === "unconfigured" ? 0 : 1);
-assert.equal(clientCalls, ["unconfigured", "headers-error"].includes(scenario) ? 0 : 1);
-assert.equal(loadCalls, ["unconfigured", "headers-error", "client-error"].includes(scenario) ? 0 : 1);
+assert.equal(
+  clientCalls,
+  ["unconfigured", "headers-error"].includes(scenario) ? 0 : 1,
+);
+assert.equal(
+  loadCalls,
+  ["unconfigured", "headers-error", "client-error"].includes(scenario) ? 0 : 1,
+);

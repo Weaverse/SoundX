@@ -1,13 +1,8 @@
 import type { WeaverseNextRequestContext } from "@weaverse/next";
 
-export type SearchParams = Record<
-  string,
-  string | string[] | undefined
->;
+export type SearchParams = Record<string, string | string[] | undefined>;
 
-export function toSearchParams(
-  input: SearchParams = {},
-): URLSearchParams {
+export function toSearchParams(input: SearchParams = {}): URLSearchParams {
   let params = new URLSearchParams();
 
   for (let [key, value] of Object.entries(input)) {

@@ -4,10 +4,7 @@ import { createWeaverseNextServerClient } from "@weaverse/next/server";
 import { headers } from "next/headers";
 
 import { buildSdkEnv } from "./env";
-import {
-  buildRequestContext,
-  type RequestContextInput,
-} from "./request-info";
+import { buildRequestContext, type RequestContextInput } from "./request-info";
 import { WEAVERSE_SERVER_COMPONENTS } from "./server-components";
 
 export function weaverseProjectId(): string | null {
@@ -15,10 +12,7 @@ export function weaverseProjectId(): string | null {
   return projectId || null;
 }
 
-export type LoadWeaversePageOptions = Omit<
-  RequestContextInput,
-  "headers"
->;
+export type LoadWeaversePageOptions = Omit<RequestContextInput, "headers">;
 
 export async function loadWeaversePage({
   type,

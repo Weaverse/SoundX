@@ -18,8 +18,7 @@ export function buildSdkEnv(
   let env: Record<string, string> = {};
 
   for (let key of SDK_ENV_KEYS) {
-    env[key] =
-      key === "WEAVERSE_PUBLIC_API_BASE" ? "" : readKey(source, key);
+    env[key] = key === "WEAVERSE_PUBLIC_API_BASE" ? "" : readKey(source, key);
   }
 
   return Object.freeze(env);

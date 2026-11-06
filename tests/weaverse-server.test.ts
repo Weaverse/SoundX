@@ -18,7 +18,12 @@ for (let scenario of [
   test(`Server page loader handles ${scenario}`, () => {
     execFileSync(
       process.execPath,
-      [fileURLToPath(new URL("./fixtures/weaverse-server.mjs", import.meta.url)), scenario],
+      [
+        fileURLToPath(
+          new URL("./fixtures/weaverse-server.mjs", import.meta.url),
+        ),
+        scenario,
+      ],
       { stdio: "pipe" },
     );
   });

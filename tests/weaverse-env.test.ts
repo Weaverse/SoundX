@@ -8,7 +8,9 @@ import { buildSdkEnv, SDK_ENV_KEYS } from "../src/lib/weaverse/env";
 
 test("SDK env key list matches the installed server bundles", async () => {
   let require = createRequire(import.meta.url);
-  let packageRoot = path.dirname(require.resolve("@weaverse/next/package.json"));
+  let packageRoot = path.dirname(
+    require.resolve("@weaverse/next/package.json"),
+  );
 
   for (let bundle of ["server.mjs", "server.js"]) {
     let source = await readFile(path.join(packageRoot, "dist", bundle), "utf8");
@@ -18,7 +20,10 @@ test("SDK env key list matches the installed server bundles", async () => {
       ),
     );
 
-    assert.ok(keys.size > 0, `No SDK env reads found in ${bundle}; review this test`);
+    assert.ok(
+      keys.size > 0,
+      `No SDK env reads found in ${bundle}; review this test`,
+    );
     assert.deepEqual(
       [...SDK_ENV_KEYS].toSorted(),
       [...keys].toSorted(),

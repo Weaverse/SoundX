@@ -3,10 +3,7 @@ import { Suspense } from "react";
 
 import { WeaversePage } from "@/lib/weaverse/page";
 import type { SearchParams } from "@/lib/weaverse/request-info";
-import {
-  loadWeaversePage,
-  weaverseProjectId,
-} from "@/lib/weaverse/server";
+import { loadWeaversePage, weaverseProjectId } from "@/lib/weaverse/server";
 
 type HomePageProps = {
   searchParams: Promise<SearchParams>;

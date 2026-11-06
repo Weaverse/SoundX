@@ -14,6 +14,4 @@ function entry(module: {
   };
 }
 
-export const WEAVERSE_COMPONENTS: WeaverseNextComponent[] = [
-    entry(TextBlock)
-]
+export const WEAVERSE_COMPONENTS: WeaverseNextComponent[] = [entry(TextBlock)];

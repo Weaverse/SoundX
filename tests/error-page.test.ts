@@ -7,13 +7,20 @@ import { STATIC_CONTENT } from "../src/lib/i18n/static-content";
 
 test("Error fallback uses shared copy and delegates recovery to Next retry", () => {
   let retries = 0;
-  let element = ErrorPage({ retry: () => { retries++; } }) as ReactElement<{
+  let element = ErrorPage({
+    retry: () => {
+      retries++;
+    },
+  }) as ReactElement<{
     role: string;
-    children: [ReactElement<{ children: string }>, ReactElement<{
-      type: string;
-      onClick: () => void;
-      children: string;
-    }>];
+    children: [
+      ReactElement<{ children: string }>,
+      ReactElement<{
+        type: string;
+        onClick: () => void;
+        children: string;
+      }>,
+    ];
   }>;
 
   assert.equal(element.props.role, "alert");

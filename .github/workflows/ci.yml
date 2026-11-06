@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feat/storefront-foundation
   pull_request:
     branches:
       - main
@@ -31,11 +30,17 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Format check
+        run: bun run format:check
+
       - name: Lint
         run: bun run lint
 
       - name: Typecheck
         run: bun run typecheck
+
+      - name: Test
+        run: bun run test
 
       - name: Build
         run: bun run build

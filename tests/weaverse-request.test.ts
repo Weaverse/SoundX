@@ -2,7 +2,10 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 
 import { clientRequestContext } from "../src/lib/weaverse/request-context";
-import { buildRequestContext, toSearchParams } from "../src/lib/weaverse/request-info";
+import {
+  buildRequestContext,
+  toSearchParams,
+} from "../src/lib/weaverse/request-info";
 
 test("Query conversion preserves repeated values, empty strings, and escaping", () => {
   let search = toSearchParams({

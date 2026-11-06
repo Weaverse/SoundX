@@ -15,10 +15,7 @@ type WeaversePageProps = {
   projectId: string;
 };
 
-export function WeaversePage({
-  data,
-  projectId,
-}: WeaversePageProps) {
+export function WeaversePage({ data, projectId }: WeaversePageProps) {
   let resolvedProjectId =
     (data.configs?.projectId as string | undefined) ??
     (data.project?.id as string | undefined) ??
