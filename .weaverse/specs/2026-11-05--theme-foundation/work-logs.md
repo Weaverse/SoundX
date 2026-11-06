@@ -202,3 +202,19 @@ Protection Bypass evaluation is deferred; no Vercel settings were changed.
   Studio preview after the cache change.
 - The SDK probe verified fetch options. Cache-hit timing on a deployed
   storefront remains unmeasured.
+
+## 2026-11-06 — Hydrogen and Shopify catalog read
+
+- Added Hydrogen 2026.10.2 and a server-only Shopify env reader, Storefront
+  client, and catalog sample query. Shopify private credentials are read
+  separately from the Weaverse SDK env.
+- The developer verified a real product response through the local Next.js
+  route `/api/shopify-check`. The route is retained for repeatable local
+  verification and returns 404 in production.
+- A synthetic probe verified missing or malformed env rejection, the
+  production guard before any catalog read, and a sanitized 502 response.
+- The Hydrogen CLI produced a Windows absolute schema path that gql.tada
+  treated as a URL. The final GraphQL check uses gql.tada directly with
+  relative paths to Hydrogen's bundled schemas.
+- Typecheck including GraphQL validation, all 31 tests, lint, and production
+  build passed. CI already calls typecheck.

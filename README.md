@@ -24,6 +24,7 @@ Publish page content in Weaverse to make it visible outside Studio.
 | Next.js | 16.4.4 |
 | React / React DOM | 19.3.0 |
 | Weaverse Next SDK | 1.0.1 |
+| Shopify Hydrogen | 2026.10.2 |
 | TypeScript | 5.9.3 |
 | ESLint | 9.39.5 |
 | eslint-config-next | 16.4.4 |
@@ -49,7 +50,7 @@ project. Obtain credentials through the team's approved channel.
 | WEAVERSE_PROJECT_ID | Default Weaverse project; the client prefers the project id from the server payload. |
 | PUBLIC_STORE_DOMAIN | Demo store's myshopify.com domain. |
 | PUBLIC_STOREFRONT_API_TOKEN | Public Storefront token supplied to Weaverse Studio for resource selection. |
-| PRIVATE_STOREFRONT_API_TOKEN | Private Storefront token reserved for server-side Shopify queries. Application integration is planned in the foundation spec. |
+| PRIVATE_STOREFRONT_API_TOKEN | Private Storefront token used by the server-only Hydrogen client. |
 
 Keep real values in `.env.local`, which Git ignores. Commit variable names
 and empty values in `.env.example`. Restart the dev server after changing
@@ -68,13 +69,18 @@ Keep the dev server running while using the local Studio preview.
 | Command | Purpose |
 | --- | --- |
 | bun run lint | Check ESLint rules. |
-| bun run typecheck | Generate Next.js route types and check TypeScript without emitting JavaScript. |
+| bun run typecheck | Generate Next.js route types, check TypeScript, and validate Shopify GraphQL queries. |
+| bun run check:graphql | Validate Shopify queries against the schemas bundled with Hydrogen. |
 | bun run build | Create the production build. |
 | bun run start | Serve an existing production build locally. |
 
 CI installs dependencies using `bun install --frozen-lockfile`, then runs
 lint, typecheck, and build. See `.github/workflows/ci.yml` for triggers
 and configuration.
+
+To verify Shopify access, open `/api/shopify-check` on the local development
+server. A successful response contains a catalog sample or `product: null`
+for an empty catalog. The route returns 404 in production.
 
 ### Configure a deployed preview
 

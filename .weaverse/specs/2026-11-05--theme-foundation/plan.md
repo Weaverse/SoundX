@@ -112,13 +112,13 @@ Verification:
 
 ## 7. Hydrogen and Shopify Read
 
-- [ ] Follow the installed/generated Hydrogen guidance for Next.js.
-- [ ] Add a compatible Hydrogen dependency and update `bun.lock`.
-- [ ] Centralize Shopify environment validation.
-- [ ] Create the server-owned `private_no_buyer_context` storefront client.
-- [ ] Keep raw Shopify access behind the storefront data boundary.
-- [ ] Add one real read through application code.
-- [ ] Keep this read independent of Weaverse's SDK environment.
+- [x] Follow the installed/generated Hydrogen guidance for Next.js.
+- [x] Add a compatible Hydrogen dependency and update `bun.lock`.
+- [x] Centralize Shopify environment validation.
+- [x] Create the server-owned `private_no_buyer_context` storefront client.
+- [x] Keep raw Shopify access behind the storefront data boundary.
+- [x] Add one real read through application code.
+- [x] Keep this read independent of Weaverse's SDK environment.
 
 Verification:
 - Test environment validation and sanitized error handling.

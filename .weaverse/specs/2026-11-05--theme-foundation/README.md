@@ -56,7 +56,9 @@ unrelated storefront features are outside this change.
 - Earlier verification reported successful local checks, a Shopify terminal
   query, and heading updates in Studio. These have not been rerun as part
   of this documentation step.
-- Shopify reads from application code are not implemented.
+- A server-only Hydrogen client reads a catalog sample from Shopify. The
+  developer confirmed the local Next.js check route returned a product from
+  the demo store. That route returns 404 in production.
 - TextBlock now preserves filtered Studio attributes on its root. The developer
   verified selection, hover outlines, and heading edits in Studio against the
   local foundation preview after enabling element selection mode.
