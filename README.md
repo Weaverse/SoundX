@@ -8,9 +8,8 @@ The theme is currently in development.
 
 ## Preview
 
-[Open the foundation preview](https://tech-git-feat-storefront-foundation-nao-3834.vercel.app)
+[Open the Tech review preview](https://tech-git-feat-storefront-foundation-nao-3834.vercel.app)
 
-This branch alias follows deployments of `feat/storefront-foundation`.
 Publish page content in Weaverse to make it visible outside Studio.
 
 ## Local setup
@@ -26,8 +25,7 @@ Publish page content in Weaverse to make it visible outside Studio.
 | Weaverse Next SDK | 1.0.1 |
 | Shopify Hydrogen | 2026.10.2 |
 | TypeScript | 5.9.3 |
-| ESLint | 9.39.5 |
-| eslint-config-next | 16.4.4 |
+| Biome | 2.6.3 |
 | Tailwind CSS / @tailwindcss/turbopack | 4.3.4 |
 
 Bun is pinned in `package.json`. Commit `bun.lock` when dependencies change.
@@ -68,15 +66,18 @@ Keep the dev server running while using the local Studio preview.
 
 | Command | Purpose |
 | --- | --- |
-| bun run lint | Check ESLint rules. |
+| bun run format | Apply Biome formatting. |
+| bun run format:check | Check formatting without modifying files. |
+| bun run lint | Check Biome lint rules. |
+| bun run test | Run the foundation tests. |
 | bun run typecheck | Generate Next.js route types, check TypeScript, and validate Shopify GraphQL queries. |
 | bun run check:graphql | Validate Shopify queries against the schemas bundled with Hydrogen. |
 | bun run build | Create the production build. |
 | bun run start | Serve an existing production build locally. |
 
 CI installs dependencies using `bun install --frozen-lockfile`, then runs
-lint, typecheck, and build. See `.github/workflows/ci.yml` for triggers
-and configuration.
+format check, lint, typecheck, tests, and build.
+See `.github/workflows/ci.yml` for triggers and configuration.
 
 To verify Shopify access, open `/api/shopify-check` on the local development
 server. A successful response contains a catalog sample or `product: null`

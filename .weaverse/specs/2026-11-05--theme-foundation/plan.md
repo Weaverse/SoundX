@@ -149,16 +149,16 @@ Verification:
 
 ## 9. Cleanup and Final Verification
 
-- [ ] Replace scaffold metadata.
-- [ ] Resolve unused/overridden scaffold fonts without importing unrelated
+- [x] Replace scaffold metadata.
+- [x] Resolve unused/overridden scaffold fonts without importing unrelated
       design-system changes.
-- [ ] Remove unused scaffold SVGs after checking references.
-- [ ] Remove duplicate ignore patterns and preserve `.env.example`.
-- [ ] Remove branch-specific setup instructions from root README.
-- [ ] Replace the deployment-specific README URL with a stable preview alias.
-- [ ] Keep root README focused on setup and usage.
-- [ ] Record deferred work and unresolved decisions in the spec.
-- [ ] Inspect the complete diff and rerun checks affected by final changes.
+- [x] Remove unused scaffold SVGs after checking references.
+- [x] Remove duplicate ignore patterns and preserve `.env.example`.
+- [x] Remove branch-specific setup instructions from root README.
+- [x] Retain the existing stable Vercel branch alias for review.
+- [x] Keep root README focused on setup and usage.
+- [x] Record deferred work and unresolved decisions in the spec.
+- [x] Inspect the cleanup diff and rerun checks affected by final changes.
 
 Verification:
 - Complete the implemented quality gates.

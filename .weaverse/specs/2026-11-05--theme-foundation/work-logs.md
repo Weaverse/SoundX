@@ -230,3 +230,21 @@ Protection Bypass evaluation is deferred; no Vercel settings were changed.
 - Frozen install, format check, lint, all 31 tests, typecheck including GraphQL,
   and the production build passed locally. The updated workflow has yet to run
   on GitHub.
+
+## 2026-11-06 — Preview documentation
+
+- Synchronized the root README with the Biome and CI commands.
+- Retained the existing Vercel Git branch alias for PR review. Its URL follows
+  the latest deployment for the foundation branch rather than a single commit.
+  Live access could not be verified in this session and remains a PR check.
+
+## 2026-11-06 — Foundation cleanup and local verification
+
+- Replaced scaffold metadata, removed Geist and unused SVGs, and removed
+  duplicate ignore rules while preserving `.env.example`.
+- Format check, lint, all 31 tests, typecheck, GraphQL validation, and
+  production build passed locally.
+- The developer confirmed Studio section selection and outline, heading
+  editing, and published content on the local Home page after a hard refresh.
+  A normal refresh still showed cached content during the check.
+- The local Shopify check route returned a real catalog product.
