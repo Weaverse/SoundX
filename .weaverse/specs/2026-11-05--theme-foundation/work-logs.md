@@ -187,3 +187,18 @@ Protection Bypass evaluation is deferred; no Vercel settings were changed.
 - The developer confirmed standalone/Studio display, selection, hover outline,
   and heading editing still work after the loader migration.
 - Step 5 is complete. Cache policy is next. No deployment or push is included.
+
+## 2026-11-06 — Weaverse page cache
+
+- The developer added the 60-second revalidation interval and the
+  `weaverse:page` tag to page loads, updated the loader test fixture, and
+  documented why Cache Components is enabled.
+- Ran the installed SDK with a synthetic response and an injected fetch. A
+  published load passed the expected revalidation interval and tag to fetch.
+  Design and revision loads passed `no-store`. Section preview made no fetch.
+- All 31 tests, lint, and the production build with TypeScript passed. The
+  build continued to report Home as partially prerendered.
+- The developer confirmed that editing a heading still updates the local
+  Studio preview after the cache change.
+- The SDK probe verified fetch options. Cache-hit timing on a deployed
+  storefront remains unmeasured.

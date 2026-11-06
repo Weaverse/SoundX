@@ -52,7 +52,14 @@ export async function loadWeaversePage({
       components: WEAVERSE_SERVER_COMPONENTS,
     });
 
-    let data = await client.loadPage({ type, handle });
+    let data = await client.loadPage({
+      type,
+      handle,
+      cache: {
+        revalidate: 60,
+        tags: ["weaverse:page"],
+      },
+    });
 
     return data ?? null;
   } catch {

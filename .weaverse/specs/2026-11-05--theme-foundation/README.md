@@ -113,7 +113,19 @@ verified in Tech.
 - Initial commerce and customer-account scope.
 - Supported markets, languages, and default market.
 - Merchant-editable global settings.
-- Published-data cache lifetimes and invalidation tags.
+
+## Page Data Cache
+
+Published Weaverse page requests use a 60-second revalidation interval and
+the shared `weaverse:page` tag. The interval limits how long the data can
+remain fresh while avoiding a Weaverse request on every compatible page load.
+Revalidation is request-driven. The tag is available for future on-demand
+invalidation and is not currently wired to publishing.
+
+Design and revision requests use the SDK's `no-store` behavior. Section-only
+preview returns synthetic data without fetching the page. Cache Components
+prerenders the shell while Home reads request headers and streams under
+Suspense. Shopify data will have a separate cache policy.
 
 ## Completion Criteria
 

@@ -99,11 +99,11 @@ Verification:
 
 ## 6. Cache Policy
 
-- [ ] Inspect the installed Next.js and Weaverse cache behavior.
-- [ ] Select published-data revalidation lifetimes and tags.
-- [ ] Preserve the SDK's design/revision no-store behavior.
-- [ ] Document the purpose of `cacheComponents`, or remove it if unnecessary.
-- [ ] Record the chosen policy and its limitations in the spec.
+- [x] Inspect the installed Next.js and Weaverse cache behavior.
+- [x] Select published-data revalidation lifetimes and tags.
+- [x] Preserve the SDK's design/revision no-store behavior.
+- [x] Document the purpose of `cacheComponents`, or remove it if unnecessary.
+- [x] Record the chosen policy and its limitations in the spec.
 
 Verification:
 - Confirm published requests receive the intended cache options.
@@ -209,4 +209,3 @@ Remove `eslint.config.mjs` when the Biome migration is complete.
 - Resolve design questions through issue #9 before affected UI work.
 - Confirm initial commerce/account scope and supported markets.
 - Confirm merchant-editable global settings.
-- Select cache lifetimes and tags during step 6.

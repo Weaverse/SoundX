@@ -50,9 +50,14 @@ mock.module("@weaverse/next/server", () => ({
     return {
       loadPage: async (input) => {
         loadCalls++;
-        assert.deepEqual(input, routeCase
-          ? { type: "INDEX", handle: undefined }
-          : { type: "PRODUCT", handle: "headphones" });
+        assert.deepEqual(input, {
+          type: routeCase ? "INDEX" : "PRODUCT",
+          handle: routeCase ? undefined : "headphones",
+          cache: {
+            revalidate: 60,
+            tags: ["weaverse:page"],
+          },
+        });
         if (mode === "load-error") throw new Error("Synthetic fetch failure");
         if (mode === "missing") return null;
         if (mode === "undefined") return undefined;
