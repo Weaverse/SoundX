@@ -9,7 +9,7 @@ import { schema } from "../src/sections/text-block/schema";
 test("TextBlock preserves Studio identity and presentation props", () => {
   let html = renderToStaticMarkup(
     createElement(TextBlock, {
-      heading: "Explore Tech",
+      heading: "Explore SoundX",
       "data-wv-id": "item-1",
       "data-wv-type": "text-block",
       "aria-label": "Introduction",
@@ -22,7 +22,7 @@ test("TextBlock preserves Studio identity and presentation props", () => {
   assert.match(html, /data-wv-type="text-block"/);
   assert.match(html, /aria-label="Introduction"/);
   assert.match(html, /class="text-center"/);
-  assert.match(html, />Explore Tech<\/h2>$/);
+  assert.match(html, />Explore SoundX<\/h2>$/);
 });
 
 test("TextBlock filters internal props and applies the authored anchor", () => {
@@ -49,6 +49,6 @@ test("Heading schema default matches its preset", () => {
 
   assert.ok(input);
   assert.equal(input.label, "Heading");
-  assert.equal(input.defaultValue, "Explore Tech");
+  assert.equal(input.defaultValue, "Explore SoundX");
   assert.equal(schema.presets?.heading, input.defaultValue);
 });

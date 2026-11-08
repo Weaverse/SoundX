@@ -1,14 +1,12 @@
-# Tech
+# SoundX
 
 A Next.js storefront theme for electronics and tech, powered by Weaverse.
-
-**Tech is a working name and may change before release.**
 
 The theme is currently in development.
 
 ## Preview
 
-[Open the deployed storefront](https://tech-nao-3834.vercel.app)
+[Open the deployed storefront](https://soundx-lac-eight.vercel.app)
 
 Publish page content in Weaverse to make it visible outside Studio.
 
@@ -34,8 +32,8 @@ CI uses the Node.js and Bun versions listed above.
 ### Install and configure
 
 ```bash
-git clone https://github.com/Weaverse/tech.git
-cd tech
+git clone https://github.com/Weaverse/SoundX.git soundx
+cd soundx
 bun install --frozen-lockfile
 cp .env.example .env.local
 ```

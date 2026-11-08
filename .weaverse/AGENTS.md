@@ -1,7 +1,7 @@
 # Weaverse maintainer guidance
 
 Read the root `AGENTS.md` first. Its rules apply throughout this repository.
-This file adds the internal spec-driven development workflow for Tech.
+This file adds the internal spec-driven development workflow for SoundX.
 
 ## Spec-driven development
 
@@ -26,10 +26,10 @@ This file adds the internal spec-driven development workflow for Tech.
 ## Foundation reference
 
 - The foundation request is issue #1:
-  https://github.com/Weaverse/tech/issues/1
+  https://github.com/Weaverse/SoundX/issues/1
 - Use Weaverse/forward as the reference for proven integration patterns,
-  adapting them to Tech's scope and approved design.
+  adapting them to SoundX's scope and approved design.
 - Follow the corrected review in PR #10 when it supersedes earlier comments:
-  https://github.com/Weaverse/tech/pull/10
+  https://github.com/Weaverse/SoundX/pull/10
 - Record unresolved design decisions before implementing affected UI.
 - Record deferred work explicitly, including its reason and expected follow-up.

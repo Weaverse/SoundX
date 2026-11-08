@@ -1,13 +1,13 @@
-# Tech Theme Foundation
+# SoundX Theme Foundation
 
 - Status: Review remediation complete — ready for re-review
 - Owner: @HoangHuy1305HP
 - Technical reviewer: @hta218
 - Created: 2026-11-05
 - Last Updated: 2026-11-08
-- Source issue: https://github.com/Weaverse/tech/issues/1
-- Pull request: https://github.com/Weaverse/tech/pull/10
-- Design review: https://github.com/Weaverse/tech/issues/9
+- Source issue: https://github.com/Weaverse/SoundX/issues/1
+- Pull request: https://github.com/Weaverse/SoundX/pull/10
+- Design review: https://github.com/Weaverse/SoundX/issues/9
 
 ## Original Prompt
 
@@ -27,7 +27,7 @@ Design review: #9.
 
 ## Summary
 
-Establish Tech's Next.js App Router foundation, Weaverse page composition,
+Establish SoundX's Next.js App Router foundation, Weaverse page composition,
 Shopify data boundary, development tooling, and preview workflow.
 
 The foundation and review remediation are implemented in PR #10 and ready
@@ -89,7 +89,7 @@ or spread the entire runtime prop bag onto the DOM.
 
 ## Capability Boundaries
 
-| Area | Platform support | Tech responsibility |
+| Area | Platform support | SoundX responsibility |
 | --- | --- | --- |
 | Page composition | Weaverse schemas, page loading, and rendering | Registries, route identity, sections, and safe DOM attributes |
 | Catalog | Shopify Storefront API and Hydrogen client | Server configuration, queries, data mapping, and route integration |
@@ -99,10 +99,10 @@ or spread the entire runtime prop bag onto the DOM.
 | Localization | Shopify market context and Weaverse translation capabilities | Supported locales, routing, formatting, and theme copy |
 | Studio editing | Weaverse editing runtime and Studio bridge | Correct registration, DOM identity, request context, and browser verification |
 | Resource-backed sections | Weaverse server loaders and revalidation support | Section loaders and a revalidation endpoint when needed |
-| Theme settings | Weaverse theme schema and root provider | Tech settings, header/footer integration, and CSS variables |
+| Theme settings | Weaverse theme schema and root provider | SoundX settings, header/footer integration, and CSS variables |
 
 Platform support does not mean the capability is already integrated or
-verified in Tech.
+verified in SoundX.
 
 ## Deferred Work
 

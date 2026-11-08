@@ -1,12 +1,12 @@
-# Tech repository guidance
+# SoundX repository guidance
 
 ## Project
 
-Tech is an electronics and technology Shopify storefront built with Next.js
-App Router and powered by Weaverse. Tech is a working name.
+SoundX is an electronics and technology Shopify storefront built with Next.js
+App Router and powered by Weaverse.
 
 Use Weaverse/forward as the implementation reference for proven integration
-patterns. Preserve Tech's approved design and scope; do not copy Forward's
+patterns. Preserve SoundX's approved design and scope; do not copy Forward's
 visual identity or unrelated features.
 
 Internal maintainers must also read `.weaverse/AGENTS.md` when present.
@@ -66,7 +66,7 @@ Internal maintainers must also read `.weaverse/AGENTS.md` when present.
 
 ## Styling and code conventions
 
-- Use Tech's approved Figma design and shared typography, color, spacing,
+- Use SoundX's approved Figma design and shared typography, color, spacing,
   and radius tokens.
 - Keep `src/app/globals.css` for Tailwind, shared tokens, and document-level
   base styles. Keep component presentation with the component.
