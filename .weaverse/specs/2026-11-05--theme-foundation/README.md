@@ -1,6 +1,6 @@
 # Tech Theme Foundation
 
-- Status: Runtime fixes verified locally — final documentation and PR verification pending
+- Status: Local verification complete — PR description and remote verification pending
 - Owner: @HoangHuy1305HP
 - Technical reviewer: @hta218
 - Created: 2026-11-05
@@ -57,9 +57,10 @@ unrelated storefront features are outside this change.
 - Local checks passed with all 31 tests on the initial reviewed revision.
   The developer confirmed CI passed on `5e8fb9d` and the deployed preview
   displayed the heading published from Studio.
-- Two fallback-page regression cases were subsequently added. All 13 tests
-  in the loader suite passed locally. Full checks and CI for the latest
-  follow-up changes remain pending.
+- Two fallback-page regression cases were subsequently added. On 2026-11-08,
+  format check, lint, all 33 tests, typecheck including GraphQL validation,
+  and production build passed locally. CI for the follow-up revision remains
+  pending.
 - A server-only Hydrogen client reads a catalog sample from Shopify. The
   developer confirmed the local Next.js check route returned a product from
   the demo store. That route returns 404 in production.

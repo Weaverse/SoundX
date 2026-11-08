@@ -54,7 +54,11 @@ export async function loadWeaversePage({
         tags: ["weaverse:page"],
       },
     });
+    let pageId = data?.page?.id;
 
+    if (typeof pageId === "string" && pageId.startsWith("fallback_page_")) {
+      return null;
+    }
     return data ?? null;
   } catch {
     return null;

@@ -8,7 +8,7 @@ The theme is currently in development.
 
 ## Preview
 
-[Open the Tech review preview](https://tech-git-feat-storefront-foundation-nao-3834.vercel.app)
+[Open the deployed storefront](https://tech-nao-3834.vercel.app)
 
 Publish page content in Weaverse to make it visible outside Studio.
 

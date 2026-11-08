@@ -75,6 +75,9 @@ mock.module("@weaverse/next/server", () => ({
         });
         if (mode === "load-error") throw new Error("Synthetic fetch failure");
         if (mode === "missing") return null;
+        if (mode === "fallback-page") {
+          return { page: { id: "fallback_page_test", items: [] } };
+        }
         if (mode === "undefined") return undefined;
         return payload;
       },

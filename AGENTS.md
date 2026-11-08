@@ -70,7 +70,7 @@ Internal maintainers must also read `.weaverse/AGENTS.md` when present.
   and radius tokens.
 - Keep `src/app/globals.css` for Tailwind, shared tokens, and document-level
   base styles. Keep component presentation with the component.
-- Reuse shared UI components and `src/components/icon.tsx`.
+- Reuse existing shared UI components when available.
 - Use `cn()` for conditional or composed class names.
 - Use `let` for ordinary variables. Reserve `const` for module-level
   `ALL_CAPS` constants.

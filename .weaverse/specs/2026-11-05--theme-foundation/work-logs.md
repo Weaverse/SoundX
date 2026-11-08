@@ -288,3 +288,16 @@ Protection Bypass evaluation is deferred; no Vercel settings were changed.
 - This controlled sample does not establish a traffic-wide hit rate or behavior
   after expiry, across regions, or across deployments. Keep the current options
   for this PR and follow the reviewer's SDK-side header investigation.
+
+## 2026-11-08 — Follow-up verification before push
+
+- Format check, lint, all 33 tests, typecheck including GraphQL validation,
+  and production build passed on the local follow-up implementation.
+- The loader now rejects SDK fallback_page_ placeholders. Tests exercise both
+  the shared loader and Home's notFound path while preserving empty real pages.
+- Hydrogen guidance was synced from installed version 2026.10.2 and committed
+  with the Biome exclusion. README now links to the project production domain,
+  and repository guidance refers only to existing shared UI components.
+- Soft-404 behavior and the deployed cache probe are documented above.
+- The PR description, final remote CI results, and final checklist/status
+  update remain pending. The developer will post review replies after push.
