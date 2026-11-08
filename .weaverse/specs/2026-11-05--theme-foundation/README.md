@@ -128,10 +128,28 @@ remain fresh while avoiding a Weaverse request on every compatible page load.
 Revalidation is request-driven. The tag is available for future on-demand
 invalidation and is not currently wired to publishing.
 
+A deployed preview probe on 2026-11-08 used four sequential requests to the
+same URL with two fresh User-Agent values. Each value's first request made
+an upstream POST and updated Data Cache, while its second request used cache.
+This supports the suspected partitioning by exact User-Agent from X-Visitor-UA.
+The probe verifies reuse within each tested value. Traffic-wide cache hit rate
+and reuse across regions or deployments remain unmeasured. Retain the current
+policy for this PR and track the reviewer's SDK-side header investigation.
+
 Design and revision requests use the SDK's `no-store` behavior. Section-only
 preview returns synthetic data without fetching the page. Cache Components
 prerenders the shell while Home reads request headers and streams under
 Suspense. Shopify data will have a separate cache policy.
+
+Home performs its Weaverse availability check inside Suspense. With Cache
+Components enabled, the shell can start streaming with HTTP 200 before
+notFound() runs. Missing compositions and Weaverse load failures therefore
+produce a streamed not-found response with noindex, which can be a soft 404.
+
+The current fallback is null and the shell has no meaningful storefront UI,
+so the page currently gains no visible PPR benefit. Header and footer work
+in issue #2 is intended to make the shared shell useful. Revisit this boundary
+if a strict HTTP 404 is required.
 
 ## Completion Criteria
 

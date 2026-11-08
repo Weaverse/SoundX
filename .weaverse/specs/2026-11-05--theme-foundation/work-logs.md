@@ -260,3 +260,31 @@ Protection Bypass evaluation is deferred; no Vercel settings were changed.
 - Updated Current Baseline to list the current CI commands, the developer's
   verification of CI on 5e8fb9d and the deployed heading, and the local loader
   regression results. Full verification of the follow-up revision is pending.
+
+## 2026-11-08 — Deployed Weaverse cache probe
+
+- Sent four sequential GET requests to
+  https://tech-git-feat-storefront-foundation-nao-3834.vercel.app/ using two
+  fresh User-Agent values. No query parameters or cache-control overrides
+  were added.
+- Deployment was dpl_Akg5HcWGwqpafdV6q1JB2UdXp93b. Vercel routed all four
+  function invocations to iad1. Times below are GMT+7, as shown in the logs.
+- The developer supplied each request's Vercel External APIs details.
+
+| Probe | Request start | User-Agent | Observed External APIs |
+| --- | --- | --- | --- |
+| A1 | 09:04:24.81 | TechCacheProbe-1794103464416-A | Using cache, upstream POST to Weaverse, Updating Data Cache |
+| A2 | 09:04:25.66 | TechCacheProbe-1794103464416-A | Using cache, no upstream POST or cache update listed |
+| B1 | 09:04:26.11 | TechCacheProbe-1794103464416-B | Using cache, upstream POST to Weaverse, Updating Data Cache |
+| B2 | 09:04:26.56 | TechCacheProbe-1794103464416-B | Using cache, no upstream POST or cache update listed |
+
+- The four logged starts span 1.75 seconds, within the 60-second revalidation
+  interval. Both repeated User-Agent values reused cached data, while changing
+  from A to B triggered another upstream POST. This supports the reviewer's
+  suspected User-Agent partitioning, consistent with the SDK's X-Visitor-UA
+  header.
+- The Partial Prerender HIT shown on all four requests describes shell caching.
+  The observations above use the External APIs details for the Weaverse fetch.
+- This controlled sample does not establish a traffic-wide hit rate or behavior
+  after expiry, across regions, or across deployments. Keep the current options
+  for this PR and follow the reviewer's SDK-side header investigation.
