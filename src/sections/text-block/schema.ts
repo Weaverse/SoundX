@@ -11,12 +11,12 @@ export const schema = createSchema({
           type: "text",
           name: "heading",
           label: "Heading",
-          defaultValue: "Explore Tech",
+          defaultValue: "Explore SoundX",
         },
       ],
     },
   ],
   presets: {
-    heading: "Explore Tech",
+    heading: "Explore SoundX",
   },
 });

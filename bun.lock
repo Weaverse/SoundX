@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "tech",
+      "name": "soundx",
       "dependencies": {
         "@shopify/hydrogen": "2026.10.2",
         "@weaverse/next": "1.0.1",

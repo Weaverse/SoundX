@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Tech",
-  description: "An electronics and technology storefront.",
+  title: "SoundX",
+  description: "SoundX is an electronics and tech storefront.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

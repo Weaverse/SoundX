@@ -2,7 +2,7 @@
 
 Status: In progress
 Owner: @HoangHuy1305HP
-Source: https://github.com/Weaverse/tech/pull/10
+Source: https://github.com/Weaverse/SoundX/pull/10
 
 ## Working Approach
 
@@ -15,7 +15,7 @@ Source: https://github.com/Weaverse/tech/pull/10
 
 ## 1. Repository Guidance and Spec
 
-- [x] Add Tech architecture and tooling guidance to root `AGENTS.md`.
+- [x] Add SoundX architecture and tooling guidance to root `AGENTS.md`.
 - [x] Preserve the Next.js-generated guidance block.
 - [x] Add internal SDD guidance in `.weaverse/AGENTS.md`.
 - [x] Add the spec README, implementation plan, and work logs.
