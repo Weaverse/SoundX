@@ -301,3 +301,20 @@ Protection Bypass evaluation is deferred; no Vercel settings were changed.
 - Soft-404 behavior and the deployed cache probe are documented above.
 - The PR description, final remote CI results, and final checklist/status
   update remain pending. The developer will post review replies after push.
+
+## 2026-11-08 — PR review follow-up completed
+
+- Pushed the follow-up changes through ba657b6. GitHub CI and Vercel
+  checks passed on that revision.
+- Updated and read back the PR description to verify the implementation,
+  validation results, preview link, and remaining scope.
+- The SDK placeholder-page comments are addressed by the loader filter
+  and two regression cases. All 33 tests passed locally.
+- Hydrogen guidance is tracked with the Biome exclusion. The README uses
+  the project production domain, and AGENTS.md references existing UI.
+- Updated the spec baseline, streaming limitations, and deployed cache
+  probe results. Completed the section 10 checklist.
+- Design handoff remains a follow-up with @imsinhp. Issue #1 stays open
+  until the decisions are recorded before affected UI work in #2.
+- Traffic-wide cache hit rate remains unmeasured. The controlled probe
+  supports User-Agent partitioning.

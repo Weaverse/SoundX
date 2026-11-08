@@ -170,10 +170,10 @@ Verification:
 ## 10. PR Update
 
 - [x] Record final local results and limitations in work logs.
-- [ ] Commit and push to `feat/storefront-foundation` when authorized.
-- [ ] Update the PR description around the final implementation.
-- [ ] Check CI results for the pushed revision.
-- [ ] Prepare a mapping of review comments to changes and verification.
+- [x] Commit and push to `feat/storefront-foundation` when authorized.
+- [x] Update the PR description around the final implementation.
+- [x] Check CI results for the pushed revision.
+- [x] Prepare a mapping of review comments to changes and verification.
 
 ## Files Touched
 

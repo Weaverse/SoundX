@@ -1,6 +1,6 @@
 # Tech Theme Foundation
 
-- Status: Local verification complete — PR description and remote verification pending
+- Status: Review remediation complete — ready for re-review
 - Owner: @HoangHuy1305HP
 - Technical reviewer: @hta218
 - Created: 2026-11-05
@@ -30,9 +30,9 @@ Design review: #9.
 Establish Tech's Next.js App Router foundation, Weaverse page composition,
 Shopify data boundary, development tooling, and preview workflow.
 
-The initial foundation exists in PR #10. Review remediation is in progress.
-This spec records the intended scope and distinguishes existing code from
-behavior that still needs implementation or verification.
+The foundation and review remediation are implemented in PR #10 and ready
+for re-review. This spec records the implementation, verification results,
+and remaining follow-up work.
 
 Forward is the reference for integration patterns. Its visual identity and
 unrelated storefront features are outside this change.
@@ -59,8 +59,8 @@ unrelated storefront features are outside this change.
   displayed the heading published from Studio.
 - Two fallback-page regression cases were subsequently added. On 2026-11-08,
   format check, lint, all 33 tests, typecheck including GraphQL validation,
-  and production build passed locally. CI for the follow-up revision remains
-  pending.
+  and production build passed locally. CI and Vercel checks passed on
+  follow-up revision `ba657b6`.
 - A server-only Hydrogen client reads a catalog sample from Shopify. The
   developer confirmed the local Next.js check route returned a product from
   the demo store. That route returns 404 in production.
