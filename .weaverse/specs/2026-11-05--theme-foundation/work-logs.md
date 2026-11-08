@@ -248,3 +248,15 @@ Protection Bypass evaluation is deferred; no Vercel settings were changed.
   editing, and published content on the local Home page after a hard refresh.
   A normal refresh still showed cached content during the check.
 - The local Shopify check route returned a real catalog product.
+
+## 2026-11-08 — Spec metadata review follow-up
+
+- Compared the foundation metadata with Forward's foundation and Hydrogen
+  upgrade specs. Status records verification progress, and Last Updated records
+  the date of the latest document change.
+- Updated Last Updated to 2026-11-08. Runtime fixes are verified locally, while
+  final documentation, PR updates, and verification of the new pushed revision
+  remain pending. The status will be finalized after those checks.
+- Updated Current Baseline to list the current CI commands, the developer's
+  verification of CI on 5e8fb9d and the deployed heading, and the local loader
+  regression results. Full verification of the follow-up revision is pending.

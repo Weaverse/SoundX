@@ -1,10 +1,10 @@
 # Tech Theme Foundation
 
-- Status: In progress — PR review remediation
+- Status: Runtime fixes verified locally — final documentation and PR verification pending
 - Owner: @HoangHuy1305HP
 - Technical reviewer: @hta218
 - Created: 2026-11-05
-- Last Updated: 2026-11-05
+- Last Updated: 2026-11-08
 - Source issue: https://github.com/Weaverse/tech/issues/1
 - Pull request: https://github.com/Weaverse/tech/pull/10
 - Design review: https://github.com/Weaverse/tech/issues/9
@@ -52,10 +52,14 @@ unrelated storefront features are outside this change.
 - The server passes explicit SDK environment keys and excludes private Shopify
   credentials. The client prefers the server payload's project identity before
   the configured fallback; the environment project gate remains in place.
-- Bun scripts and CI currently run lint, typecheck, and build.
-- Earlier verification reported successful local checks, a Shopify terminal
-  query, and heading updates in Studio. These have not been rerun as part
-  of this documentation step.
+- Bun scripts and CI run format check, lint, typecheck including Shopify
+  GraphQL validation, tests, and production build.
+- Local checks passed with all 31 tests on the initial reviewed revision.
+  The developer confirmed CI passed on `5e8fb9d` and the deployed preview
+  displayed the heading published from Studio.
+- Two fallback-page regression cases were subsequently added. All 13 tests
+  in the loader suite passed locally. Full checks and CI for the latest
+  follow-up changes remain pending.
 - A server-only Hydrogen client reads a catalog sample from Shopify. The
   developer confirmed the local Next.js check route returned a product from
   the demo store. That route returns 404 in production.
