@@ -33,8 +33,8 @@ function asBoolean(value: unknown): boolean | undefined {
 export function clientRequestContext(
   data: WeaverseNextLoaderData,
 ): WeaverseNextRequestContext {
-  const configs = data.configs ?? {};
-  const requestInfo = configs.requestInfo as SerializedRequestInfo | undefined;
+  let configs = data.configs ?? {};
+  let requestInfo = configs.requestInfo as SerializedRequestInfo | undefined;
 
   return {
     handle: requestInfo?.handle,

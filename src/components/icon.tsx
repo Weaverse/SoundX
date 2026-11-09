@@ -2,8 +2,7 @@ import type { SVGProps } from "react";
 
 /** Exact paths from the Tech Figma icons, preserving their original grids. */
 export const ICON_PATHS = {
-  "arrow-right":
-    "M4.16667 10H15.8333M10.8333 5L15.8333 10L10.8333 15",
+  "arrow-right": "M4.16667 10H15.8333M10.8333 5L15.8333 10L10.8333 15",
   check: "M2.5 6L5 8.5L10 3.5",
   "chevron-up": "M4 10L8 6L12 10",
   search:
@@ -17,15 +16,24 @@ const ICON_VIEW_BOXES: Partial<Record<IconName, string>> = {
   "chevron-up": "0 0 16 16",
 };
 
-export interface IconProps extends Omit<SVGProps<SVGSVGElement>, "name" | "children"> {
+export interface IconProps
+  extends Omit<SVGProps<SVGSVGElement>, "name" | "children"> {
   name: IconName;
   size?: number;
   title?: string;
 }
 
 /** Shared inline SVG. Decorative by default; title/aria-label supplies a name. */
-export function Icon({ name, size = 20, title, className = "", ...props }: IconProps) {
-  const hasAccessibleName = Boolean(title || props["aria-label"] || props["aria-labelledby"]);
+export function Icon({
+  name,
+  size = 20,
+  title,
+  className = "",
+  ...props
+}: IconProps) {
+  const hasAccessibleName = Boolean(
+    title || props["aria-label"] || props["aria-labelledby"],
+  );
 
   return (
     <svg
@@ -41,6 +49,8 @@ export function Icon({ name, size = 20, title, className = "", ...props }: IconP
       focusable="false"
       aria-hidden={hasAccessibleName ? undefined : true}
       role={hasAccessibleName ? "img" : undefined}
+      aria-label={props["aria-label"] ?? title}
+      aria-labelledby={props["aria-labelledby"]}
       {...props}
       className={["inline-block shrink-0 align-middle", className].join(" ")}
     >

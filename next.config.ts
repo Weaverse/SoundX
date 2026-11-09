@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Prerender the page shell. HomeContent reads request headers and
+  // streams the Weaverse page inside Suspense at request time.
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

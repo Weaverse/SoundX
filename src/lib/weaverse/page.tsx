@@ -1,33 +1,35 @@
-"use client"
+"use client";
 
 import {
-    createWeaverseNextClient,
-    WeaverseNextProvider,
-    WeaverseNextRenderer,
-    type WeaverseNextLoaderData,
+  createWeaverseNextClient,
+  WeaverseNextProvider,
+  WeaverseNextRenderer,
+  type WeaverseNextLoaderData,
 } from "@weaverse/next";
 
 import { WEAVERSE_COMPONENTS } from "./components";
 import { clientRequestContext } from "./request-context";
 
 type WeaversePageProps = {
-    data: WeaverseNextLoaderData;
-    projectId: string,
-}
+  data: WeaverseNextLoaderData;
+  projectId: string;
+};
 
-export function WeaversePage({
-    data,
-    projectId,
-}: WeaversePageProps) {
-    const client = createWeaverseNextClient({ // nhận danh sách component Tech biết render
-        components: WEAVERSE_COMPONENTS,
-        projectId,
-        requestContext: clientRequestContext(data)
-    })
+export function WeaversePage({ data, projectId }: WeaversePageProps) {
+  let resolvedProjectId =
+    (data.configs?.projectId as string | undefined) ??
+    (data.project?.id as string | undefined) ??
+    projectId;
 
-    return (
-        <WeaverseNextProvider client={client}> {/* đưa client vào context -> renderer bên trong sử dụng */}
-            <WeaverseNextRenderer data={data}></WeaverseNextRenderer>
-        </WeaverseNextProvider>
-    )
+  let client = createWeaverseNextClient({
+    components: WEAVERSE_COMPONENTS,
+    projectId: resolvedProjectId,
+    requestContext: clientRequestContext(data),
+  });
+
+  return (
+    <WeaverseNextProvider client={client}>
+      <WeaverseNextRenderer data={data} />
+    </WeaverseNextProvider>
+  );
 }

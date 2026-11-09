@@ -20,7 +20,12 @@ export type InputProps = Omit<ComponentProps<"input">, "children"> & {
   inputClassName?: string;
 };
 
-function InputAction({ icon, label, type = "button", ...props }: InputEndAction) {
+function InputAction({
+  icon,
+  label,
+  type = "button",
+  ...props
+}: InputEndAction) {
   return (
     <button
       {...props}
@@ -46,11 +51,15 @@ export function Input({
   ...props
 }: InputProps) {
   const defaultIcon =
-    variant === "search" ? <Icon name="search" /> :
-    variant === "with-arrow" ? <Icon name="arrow-right" /> : null;
+    variant === "search" ? (
+      <Icon name="search" />
+    ) : variant === "with-arrow" ? (
+      <Icon name="arrow-right" />
+    ) : null;
   // Pass endIcon={null} to hide the variant's default icon.
   const trailingIcon = endIcon === undefined ? defaultIcon : endIcon;
-  const hasStartIcon = startIcon !== undefined && startIcon !== null && startIcon !== false;
+  const hasStartIcon =
+    startIcon !== undefined && startIcon !== null && startIcon !== false;
   const hasEndIcon = trailingIcon !== null && trailingIcon !== false;
   const hasIcon = hasStartIcon || hasEndIcon || Boolean(endAction);
 
@@ -66,7 +75,10 @@ export function Input({
       ].join(" ")}
     >
       {hasStartIcon && (
-        <span aria-hidden="true" className="pointer-events-none flex size-5 shrink-0 items-center justify-center text-text-main">
+        <span
+          aria-hidden="true"
+          className="pointer-events-none flex size-5 shrink-0 items-center justify-center text-text-main"
+        >
           {startIcon}
         </span>
       )}
@@ -85,7 +97,10 @@ export function Input({
       {endAction ? (
         <InputAction {...endAction} disabled={disabled || endAction.disabled} />
       ) : hasEndIcon ? (
-        <span aria-hidden="true" className="pointer-events-none flex size-5 shrink-0 items-center justify-center text-text-main">
+        <span
+          aria-hidden="true"
+          className="pointer-events-none flex size-5 shrink-0 items-center justify-center text-text-main"
+        >
           {trailingIcon}
         </span>
       ) : null}

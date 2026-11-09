@@ -1,31 +1,66 @@
-import { createWeaverseNextServerClient } from "@weaverse/next/server";
-import type { WeaverseNextComponent, WeaverseNextRequestContext } from "@weaverse/next";
-import * as TextBlock from "@/sections/text-block";
+import "server-only";
 
+import { createWeaverseNextServerClient } from "@weaverse/next/server";
+import { headers } from "next/headers";
+
+import { buildSdkEnv } from "./env";
+import { buildRequestContext, type RequestContextInput } from "./request-info";
+import { WEAVERSE_SERVER_COMPONENTS } from "./server-components";
 
 export function weaverseProjectId(): string | null {
-  const projectId = process.env.WEAVERSE_PROJECT_ID?.trim();
+  let projectId = process.env.WEAVERSE_PROJECT_ID?.trim();
   return projectId || null;
 }
 
-export function loadWeaverseHomePage(requestContext: WeaverseNextRequestContext) {
-  const projectId = weaverseProjectId();
+export type LoadWeaversePageOptions = Omit<RequestContextInput, "headers">;
 
-  if(!projectId) {
-    return null
-  }
+export async function loadWeaversePage({
+  type,
+  handle,
+  pathname,
+  searchParams,
+  locale,
+}: LoadWeaversePageOptions) {
+  try {
+    let projectId = weaverseProjectId();
 
-  const client = createWeaverseNextServerClient({
-    projectId,
-    requestContext,
-    components: [
-      {
-        default: TextBlock.default as WeaverseNextComponent["default"],
-        schema: TextBlock.schema,
+    if (!projectId) {
+      return null;
+    }
+
+    let requestHeaders = await headers();
+
+    let requestContext = buildRequestContext({
+      headers: new Headers(requestHeaders),
+      type,
+      handle,
+      pathname,
+      searchParams,
+      locale,
+    });
+
+    let client = createWeaverseNextServerClient({
+      env: buildSdkEnv(process.env),
+      projectId,
+      requestContext,
+      components: WEAVERSE_SERVER_COMPONENTS,
+    });
+
+    let data = await client.loadPage({
+      type,
+      handle,
+      cache: {
+        revalidate: 60,
+        tags: ["weaverse:page"],
       },
-],
-  })
+    });
+    let pageId = data?.page?.id;
 
-  return client.loadPage({type:'INDEX'})
+    if (typeof pageId === "string" && pageId.startsWith("fallback_page_")) {
+      return null;
+    }
+    return data ?? null;
+  } catch {
+    return null;
+  }
 }
-

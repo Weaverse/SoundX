@@ -1,20 +1,21 @@
 @import "tailwindcss";
+
 @theme inline {
   /* Container */
   --container-page: 87.5rem; /* 1400px */
 
   /* Padding py */
   --spacing-section-mobile: 4rem; /* 64px */
-  --spacing-section-wide: 5rem;   /* 80px — tablet và desktop */
+  --spacing-section-wide: 5rem; /* 80px — tablet và desktop */
 
   /* Grid gutter */
-  --spacing-gutter: 1rem;          /* 16px — mobile và tablet */
+  --spacing-gutter: 1rem; /* 16px — mobile và tablet */
   --spacing-gutter-desktop: 1.5rem; /* 24px */
 
   /* Padding px  */
-  --spacing-page-mobile:1.25rem;
-  --spacing-page-tablet: 1.5rem;   /* 24px */
-  --spacing-page-desktop: 2.5rem;  /* 40px */
+  --spacing-page-mobile: 1.25rem;
+  --spacing-page-tablet: 1.5rem; /* 24px */
+  --spacing-page-desktop: 2.5rem; /* 40px */
 
   /* Breakpoint */
   --breakpoint-md: 48rem; /* 768px */
@@ -29,8 +30,8 @@
   --color-background: #ffffff;
   --color-foreground: var(--color-text-main);
   --color-text-main: #424242;
-  --color-text-subtle: #a5a2a7;   /* mô tả phụ */
-  --color-text-inverse: #fafafa;  /* màu chữ sáng trên nền tối */
+  --color-text-subtle: #a5a2a7; /* mô tả phụ */
+  --color-text-inverse: #fafafa; /* màu chữ sáng trên nền tối */
   --color-surface-light: #f3f1f3; /* màu nền của 1 vùng giao diện */
   --color-surface-subtle: #f4f4f6;
 
@@ -61,7 +62,7 @@
 
   /* Labels and borders */
   --color-label-accent: #262627; /* màu nhấn cho nhãn sp */
-  --color-label-sale: #2da948;   /* màu nhấn cho nhãn giảm giá */
+  --color-label-sale: #2da948; /* màu nhấn cho nhãn giảm giá */
   --color-border-primary: #262627;
   --color-border-subtle: #e6e2e8;
 

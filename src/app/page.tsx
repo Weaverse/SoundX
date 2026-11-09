@@ -1,56 +1,37 @@
-import { WeaversePage } from "@/lib/weaverse/page";
-import {
-  loadWeaverseHomePage,
-  weaverseProjectId,
-} from "@/lib/weaverse/server";
-import { headers } from "next/headers";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
+import { WeaversePage } from "@/lib/weaverse/page";
+import type { SearchParams } from "@/lib/weaverse/request-info";
+import { loadWeaversePage, weaverseProjectId } from "@/lib/weaverse/server";
+
 type HomePageProps = {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
+  searchParams: Promise<SearchParams>;
 };
 
 async function HomeContent({ searchParams }: HomePageProps) {
-  const projectId = weaverseProjectId();
+  let projectId = weaverseProjectId();
 
   if (!projectId) {
-    return <p>Chưa cấu hình Weaverse project cho Tech.</p>;
+    notFound();
   }
 
-  const requestHeaders = await headers();
-  const query = new URLSearchParams();
-  for (const [key, value] of Object.entries(await searchParams)) {
-    for (const entry of Array.isArray(value) ? value : [value]) {
-      if (entry !== undefined) query.append(key, entry);
-    }
-  }
-
-  const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host");
-  const protocol = requestHeaders.get("x-forwarded-proto") ?? "http";
-  const data = await loadWeaverseHomePage({
-    headers: new Headers(Object.fromEntries(requestHeaders.entries())),
+  let data = await loadWeaversePage({
+    type: "INDEX",
     pathname: "/",
-    pageType: "INDEX",
-    searchParams: query,
-    url: host ? `${protocol}://${host}/?${query}` : undefined,
-    i18n: { country: "US", language: "EN", locale: "en-US", label: "United States", pathPrefix: "" },
+    searchParams: await searchParams,
   });
 
   if (!data) {
-    return <p>Chưa tải được nội dung trang chủ từ Weaverse.</p>;
+    notFound();
   }
 
-  return (
-    <WeaversePage
-      data={data}
-      projectId={projectId}
-    />
-  );
+  return <WeaversePage data={data} projectId={projectId} />;
 }
 
 export default function HomePage({ searchParams }: HomePageProps) {
   return (
-    <Suspense fallback={<p>Đang tải trang chủ…</p>}>
+    <Suspense fallback={null}>
       <HomeContent searchParams={searchParams} />
     </Suspense>
   );

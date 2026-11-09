@@ -18,10 +18,7 @@ export default function UiPreviewPage() {
       <Button variant="primary">View Detail</Button>
 
       <div className="w-full max-w-sm rounded-md bg-primary-background p-6">
-        <InputUnderline
-          placeholder="Your email address"
-          aria-label="Email"
-        />
+        <InputUnderline placeholder="Your email address" aria-label="Email" />
       </div>
 
       <div className="w-full max-w-sm">
