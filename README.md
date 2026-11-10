@@ -6,7 +6,7 @@ The theme is currently in development.
 
 ## Preview
 
-[Open the deployed storefront](https://soundx-lac-eight.vercel.app)
+[Open the deployed storefront](https://sound-x.vercel.app)
 
 Publish page content in Weaverse to make it visible outside Studio.
 
