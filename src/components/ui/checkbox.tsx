@@ -1,6 +1,7 @@
 import type { ComponentProps, ReactNode } from "react";
 
 import { Icon } from "@/components/icon";
+import { cn } from "@/lib/cn";
 
 export type CheckboxProps = Omit<
   ComponentProps<"input">,
@@ -18,11 +19,11 @@ export function Checkbox({
 }: CheckboxProps) {
   return (
     <label
-      className={[
+      className={cn(
         "inline-flex items-center gap-4 font-sans text-ui-base tracking-normal text-text-main",
         disabled ? "cursor-not-allowed" : "cursor-pointer",
         className,
-      ].join(" ")}
+      )}
     >
       <span className="relative flex size-5 shrink-0">
         <input

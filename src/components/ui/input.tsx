@@ -1,6 +1,7 @@
 import type { ComponentProps, ReactNode } from "react";
 
 import { Icon } from "@/components/icon";
+import { cn } from "@/lib/cn";
 
 export type InputVariant = "text" | "with-arrow" | "search";
 
@@ -31,7 +32,7 @@ function InputAction({
       {...props}
       type={type}
       aria-label={label}
-      className="flex size-5 shrink-0 items-center justify-center border-0 bg-transparent p-0 text-text-main outline-none enabled:cursor-pointer disabled:cursor-not-allowed"
+      className="flex size-5 shrink-0 items-center justify-center border-0 bg-transparent p-0 text-text-main outline-none enabled:cursor-pointer disabled:cursor-not-allowed focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-border-primary"
     >
       <span aria-hidden="true">{icon}</span>
     </button>
@@ -50,29 +51,29 @@ export function Input({
   inputClassName = "",
   ...props
 }: InputProps) {
-  const defaultIcon =
+  let defaultIcon =
     variant === "search" ? (
       <Icon name="search" />
     ) : variant === "with-arrow" ? (
       <Icon name="arrow-right" />
     ) : null;
   // Pass endIcon={null} to hide the variant's default icon.
-  const trailingIcon = endIcon === undefined ? defaultIcon : endIcon;
-  const hasStartIcon =
+  let trailingIcon = endIcon === undefined ? defaultIcon : endIcon;
+  let hasStartIcon =
     startIcon !== undefined && startIcon !== null && startIcon !== false;
-  const hasEndIcon = trailingIcon !== null && trailingIcon !== false;
-  const hasIcon = hasStartIcon || hasEndIcon || Boolean(endAction);
+  let hasEndIcon = trailingIcon !== null && trailingIcon !== false;
+  let hasIcon = hasStartIcon || hasEndIcon || Boolean(endAction);
 
   return (
     <div
-      className={[
+      className={cn(
         "flex w-full min-w-0 items-start gap-2 rounded-md bg-background px-4 py-3.5",
         "inset-ring-2 inset-ring-border-subtle focus-within:inset-ring-border-primary",
         "transition-[box-shadow,border-radius] duration-400 ease-out motion-reduce:transition-none",
         hasIcon ? "min-h-12" : "min-h-[45px]",
         disabled ? "cursor-not-allowed" : "hover:inset-ring-border-primary",
         className,
-      ].join(" ")}
+      )}
     >
       {hasStartIcon && (
         <span
@@ -86,13 +87,13 @@ export function Input({
         {...props}
         type={type ?? (variant === "search" ? "search" : "text")}
         disabled={disabled}
-        className={[
+        className={cn(
           "block w-full min-w-0 flex-1 appearance-none rounded-none border-0 bg-transparent p-0",
           "font-sans text-ui-base-medium tracking-normal text-text-subtle outline-none",
           "placeholder:text-text-subtle placeholder:opacity-100 disabled:cursor-not-allowed",
           "[&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none",
           inputClassName,
-        ].join(" ")}
+        )}
       />
       {endAction ? (
         <InputAction {...endAction} disabled={disabled || endAction.disabled} />

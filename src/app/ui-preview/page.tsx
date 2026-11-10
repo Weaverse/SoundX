@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
-
+import { InputActionDemo } from "@/components/ui/input-action-demo";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { InputUnderline } from "@/components/ui/input-underline";
 import { Textarea } from "@/components/ui/textarea";
-
+import { QuantityInput } from "@/components/ui/quantity-input";
 export default function UiPreviewPage() {
   if (process.env.NODE_ENV !== "development") {
     notFound();
@@ -50,11 +50,24 @@ export default function UiPreviewPage() {
         />
       </div>
 
+      <QuantityInput
+        name="quantity"
+        defaultValue={1}
+        min={1}
+        max={10}
+        step={1}
+        aria-label="Quantity"
+        decrementLabel="Decrease quantity"
+        incrementLabel="Increase quantity"
+      />
+
       <div className="flex flex-col items-start gap-5">
         <Checkbox label="Silver" name="color" value="Silver" defaultChecked />
         <Checkbox label="Black" name="color" value="Black" defaultChecked />
         <Checkbox label="Sand" name="color" value="Sand" />
       </div>
+
+      <InputActionDemo />
     </main>
   );
 }
