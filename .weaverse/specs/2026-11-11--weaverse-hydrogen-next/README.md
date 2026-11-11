@@ -22,6 +22,12 @@ Source: https://github.com/Weaverse/SoundX/issues/16 (request supplied by the de
 
 ## Summary
 
-Pin `@weaverse/hydrogen` to 6.1.2 and use its Next.js entries, following https://github.com/Weaverse/forward/pull/118. Preserve the server/client registry, request context and explicit environment boundary.
+Pin `@weaverse/hydrogen` to 6.2.0 and use its Next.js entries, following https://github.com/Weaverse/forward/pull/118. Preserve the server/client registry, request context and explicit environment boundary.
 
-The developer reports automated checks, local rendering, Studio section additions/edits and publishing passed. Theme settings and translations are not implemented in this baseline and remain unverified. Verification of a deployment containing this migration is pending. Issue #2 stays in a separate worktree.
+The initial 6.1.2 verification was developer-run. On 6.2.0, the assistant independently passed format, lint, typecheck, 33 tests and build, and verified local Studio rendering, section selection and live text editing with the original text restored. The developer subsequently confirmed publishing from Studio on 6.2.0 succeeded. Theme settings and translations are not implemented in this baseline and remain unverified. Verification of a deployment containing this migration is pending. Issue #2 stays in a separate worktree.
+
+## Requirement Update — 2026-11-11
+
+The reviewer updated issue #16 to require `@weaverse/hydrogen` 6.2.0 or later. Version 6.2.0 contains the Next.js adapter directly; `@weaverse/next` is deprecated and is no longer a dependency, direct or transitive. Release: https://github.com/Weaverse/weaverse/releases/tag/v6.2.0.
+
+Use the SDK exports `createTranslate`, `getWeaverseNextSeoMetadata` and `formatWeaverseNextSeoMetadata` from `@weaverse/hydrogen/next` when implementing translation/SEO behavior instead of duplicating those helpers. The current SoundX baseline has no custom translation or page-SEO formatter to replace; its static layout metadata is retained.

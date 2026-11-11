@@ -32,6 +32,9 @@ Internal maintainers must also read `.weaverse/AGENTS.md` when present.
 - Import Weaverse APIs and types from `@weaverse/hydrogen/next` and
   `@weaverse/hydrogen/next/server`. Do not rely on hoisted internal
   Weaverse packages.
+- Use the SDK `createTranslate`, `getWeaverseNextSeoMetadata` and
+  `formatWeaverseNextSeoMetadata` helpers for translation and Weaverse page SEO;
+  do not duplicate them in the theme.
 - Keep the client render registry in `src/lib/weaverse/components.ts`,
   with `"use client"` and `entry()`.
 - Keep the server registry separate in `server-components.ts`. It must be

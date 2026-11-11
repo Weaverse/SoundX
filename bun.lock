@@ -6,7 +6,7 @@
       "name": "soundx",
       "dependencies": {
         "@shopify/hydrogen": "2026.10.2",
-        "@weaverse/hydrogen": "6.1.2",
+        "@weaverse/hydrogen": "6.2.0",
         "next": "16.4.4",
         "react": "19.3.0",
         "react-dom": "19.3.0",
@@ -215,13 +215,11 @@
 
     "@types/react-dom": ["@types/react-dom@19.3.0", "", { "peerDependencies": { "@types/react": "^19.3.0" } }, "sha512-ZI7bU42mZXXKHn/qNLEw2IrbiINU7X5+vfgdixBHkCNpYWXjKgfQ/P+uyGb5CjOLB9UcnTeg3rylQtV2hym44Q=="],
 
-    "@weaverse/core": ["@weaverse/core@6.1.2", "", {}, "sha512-nfg7Jwmltwd9xg4EAjscUiMBOx8N+UEVXdsX5vP58mq8Az8QqbnEQHscNYy+qMgE6+uLDzE1A/1bt+BJsG57Rw=="],
+    "@weaverse/core": ["@weaverse/core@6.2.0", "", {}, "sha512-owNG2HGzTxvh67s2HWUo/Izc6mxG+RLsoNmF9sd5C2iUaH3tNzG9AyIuTTNeVMlpiE9vGASOQWucunXVhDXpxA=="],
 
-    "@weaverse/hydrogen": ["@weaverse/hydrogen@6.1.2", "", { "dependencies": { "@weaverse/next": "1.1.3", "@weaverse/react": "6.1.2", "@weaverse/schema": "0.20.0", "react": ">=19", "react-dom": ">=19", "react-error-boundary": "^6", "react-router": "^7" }, "peerDependencies": { "@shopify/hydrogen": ">=2026.10.0" } }, "sha512-Pf0ifo93LBmQHz2NqCCMSgPWCC5PogakllPoJcRlr4yOiAkVjO/7asV3fGAlMTWcqixhzvlzt6ETm/1/f1K7aA=="],
+    "@weaverse/hydrogen": ["@weaverse/hydrogen@6.2.0", "", { "dependencies": { "@weaverse/react": "6.2.0", "@weaverse/schema": "0.20.0", "react": ">=19", "react-dom": ">=19", "react-error-boundary": "^6", "react-router": "^7" }, "peerDependencies": { "@shopify/hydrogen": ">=2026.10.0", "next": ">=14" }, "optionalPeers": ["next"] }, "sha512-cll6L1m94RSda1hQlB2nxcJEb7k5hZo6dWYCws/nKlTxuAAYKm7MvZy7kSek5qWMKVrNMyWh3/zhAruTgNWGjA=="],
 
-    "@weaverse/next": ["@weaverse/next@1.1.3", "", { "dependencies": { "@weaverse/react": "6.1.2", "@weaverse/schema": "0.20.0" }, "peerDependencies": { "next": ">=14", "react": ">=19", "react-dom": ">=19" }, "optionalPeers": ["next"] }, "sha512-lNbUR1upFKO4bRFhVoTNTAt4X/RtzvC0ewT6w5PMVoCRXAB2l+2WNXJHTGNPIDZPKQR485mp7Mvt748aUYbsOQ=="],
-
-    "@weaverse/react": ["@weaverse/react@6.1.2", "", { "dependencies": { "@weaverse/core": "6.1.2", "clsx": "^2.1.1", "react": ">=19", "react-dom": ">=19" } }, "sha512-wfFfeFg66m1NOFpk2sDOssXCerRn4CIWvg2Mhvj/Hy/I88P8FglI+IfEspha0hv1ow9r1SJfPB0J80w8Oqppqg=="],
+    "@weaverse/react": ["@weaverse/react@6.2.0", "", { "dependencies": { "@weaverse/core": "6.2.0", "clsx": "^2.1.1", "react": ">=19", "react-dom": ">=19" } }, "sha512-AieiYhHOV8GP8RT+UO5l0w6ju17i0Jxgmri9AkxiR9lDe1Z7vFOy2LGrOKzls8PXXz6+ZsSi5HDmtNSUpiaGMw=="],
 
     "@weaverse/schema": ["@weaverse/schema@0.20.0", "", { "dependencies": { "zod": "^4.3.6" } }, "sha512-lU3PR7AhdqgLOOXlER6SM+DJH/N6x+kj8Pf/TCKdI7MnphnwC04SquWb3qfXq3y8mZMY0Gkgsk7U8jWk2kqXdA=="],
 
