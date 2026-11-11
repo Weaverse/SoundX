@@ -45,7 +45,22 @@
     },
     "rules": {
       "preset": "recommended",
-      "style": { "useConst": "off" }
+      "style": {
+        "useConst": "off",
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "paths": {
+              "@weaverse/next": "Import from @weaverse/hydrogen/next.",
+              "@weaverse/next/server": "Import from @weaverse/hydrogen/next/server.",
+              "@weaverse/hydrogen/react-router": "Use the Next.js adapter: @weaverse/hydrogen/next.",
+              "@weaverse/core": "Import from @weaverse/hydrogen/next.",
+              "@weaverse/react": "Import from @weaverse/hydrogen/next.",
+              "@weaverse/schema": "Import from @weaverse/hydrogen/next."
+            }
+          }
+        }
+      }
     }
   }
 }

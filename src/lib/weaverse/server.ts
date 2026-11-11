@@ -1,6 +1,6 @@
 import "server-only";
 
-import { createWeaverseNextServerClient } from "@weaverse/next/server";
+import { createWeaverseNextServerClient } from "@weaverse/hydrogen/next/server";
 import { headers } from "next/headers";
 
 import { buildSdkEnv } from "./env";
