@@ -1,6 +1,6 @@
 import "server-only";
 
-import type { WeaverseNextComponent } from "@weaverse/next";
+import type { WeaverseNextComponent } from "@weaverse/hydrogen/next";
 
 import { SECTION_SCHEMAS } from "./section-schemas";
 

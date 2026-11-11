@@ -1,6 +1,6 @@
 "use client";
 
-import type { WeaverseNextComponent } from "@weaverse/next";
+import type { WeaverseNextComponent } from "@weaverse/hydrogen/next";
 
 import * as TextBlock from "@/sections/text-block";
 

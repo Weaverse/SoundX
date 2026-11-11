@@ -8,8 +8,11 @@ import { buildSdkEnv, SDK_ENV_KEYS } from "../src/lib/weaverse/env";
 
 test("SDK env key list matches the installed server bundles", async () => {
   let require = createRequire(import.meta.url);
+  let sdkRequire = createRequire(
+    require.resolve("@weaverse/hydrogen/package.json"),
+  );
   let packageRoot = path.dirname(
-    require.resolve("@weaverse/next/package.json"),
+    sdkRequire.resolve("@weaverse/next/package.json"),
   );
 
   for (let bundle of ["server.mjs", "server.js"]) {

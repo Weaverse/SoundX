@@ -29,8 +29,9 @@ Internal maintainers must also read `.weaverse/AGENTS.md` when present.
 
 ## Weaverse integration
 
-- Import Weaverse APIs and types from `@weaverse/next` or its documented
-  subpaths. Do not rely on hoisted internal Weaverse packages.
+- Import Weaverse APIs and types from `@weaverse/hydrogen/next` and
+  `@weaverse/hydrogen/next/server`. Do not rely on hoisted internal
+  Weaverse packages.
 - Keep the client render registry in `src/lib/weaverse/components.ts`,
   with `"use client"` and `entry()`.
 - Keep the server registry separate in `server-components.ts`. It must be

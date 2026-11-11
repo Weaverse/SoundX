@@ -1,4 +1,4 @@
-import { WeaverseNextStudioConnect } from "@weaverse/next";
+import { WeaverseNextStudioConnect } from "@weaverse/hydrogen/next";
 import type { Metadata } from "next";
 import "./globals.css";
 
