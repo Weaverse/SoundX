@@ -1,4 +1,4 @@
-import { WeaverseNextStudioConnect } from "@weaverse/next";
+import { WeaverseNextStudioConnect } from "@weaverse/hydrogen/next";
 import type { Metadata } from "next";
 import { Inter, Open_Sans } from "next/font/google";
 

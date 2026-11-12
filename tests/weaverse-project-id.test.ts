@@ -4,7 +4,7 @@ import type { ComponentProps, ReactElement } from "react";
 import {
   WeaverseNextProvider,
   type WeaverseNextLoaderData,
-} from "@weaverse/next";
+} from "@weaverse/hydrogen/next";
 
 import { WeaversePage } from "../src/lib/weaverse/page";
 

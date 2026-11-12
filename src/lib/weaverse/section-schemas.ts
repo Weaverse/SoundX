@@ -1,4 +1,4 @@
-import type { WeaverseNextComponent } from "@weaverse/next";
+import type { WeaverseNextComponent } from "@weaverse/hydrogen/next";
 
 import { schema as textBlockSchema } from "@/sections/text-block/schema";
 

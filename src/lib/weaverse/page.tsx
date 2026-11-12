@@ -5,7 +5,7 @@ import {
   WeaverseNextProvider,
   WeaverseNextRenderer,
   type WeaverseNextLoaderData,
-} from "@weaverse/next";
+} from "@weaverse/hydrogen/next";
 
 import { WEAVERSE_COMPONENTS } from "./components";
 import { clientRequestContext } from "./request-context";

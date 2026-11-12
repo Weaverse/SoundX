@@ -38,7 +38,7 @@ mock.module("next/headers", () => ({
     return new Headers({ host: "shop.example", "x-forwarded-proto": "https" });
   },
 }));
-mock.module("@weaverse/next/server", () => ({
+mock.module("@weaverse/hydrogen/next/server", () => ({
   createWeaverseNextServerClient: (options) => {
     clientCalls++;
     assert.equal(options.projectId, "test-project");
