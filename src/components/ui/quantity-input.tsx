@@ -79,6 +79,17 @@ export function QuantityInput({
     updateQuantity(String(bounded));
   }
 
+  function normalizeQuantity(value: number) {
+    let next = Number.isFinite(value) ? value : min;
+
+    let bounded = Math.min(
+      max ?? Number.POSITIVE_INFINITY,
+      Math.max(min, next),
+    );
+
+    updateQuantity(String(bounded));
+  }
+
   return (
     <div
       className={cn(
@@ -122,9 +133,7 @@ export function QuantityInput({
         }}
         onBlur={(event) => {
           if (!readOnly && !disabled) {
-            let next = event.currentTarget.valueAsNumber;
-
-            updateQuantity(Number.isFinite(next) ? String(next) : String(min));
+            normalizeQuantity(event.currentTarget.valueAsNumber);
           }
 
           onBlur?.(event);
