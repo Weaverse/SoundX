@@ -9,8 +9,8 @@ type ErrorPageProps = {
 export default function ErrorPage({ retry }: ErrorPageProps) {
   return (
     <div role="alert">
-      <h2>{STATIC_CONTENT.errors.unexpected}</h2>
-      <button type="button" onClick={() => retry()}>
+      <h2 className="font-heading">{STATIC_CONTENT.errors.unexpected}</h2>
+      <button className="font-sans" type="button" onClick={() => retry()}>
         {STATIC_CONTENT.errors.retry}
       </button>
     </div>

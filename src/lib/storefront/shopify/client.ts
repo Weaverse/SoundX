@@ -7,11 +7,11 @@ import {
 
 import { readShopifyEnv } from "./env";
 
-export function createShopifyReadClient() {
+export function createShopifyReadClient(request?: Request) {
   let config = readShopifyEnv();
 
   let requestContext = createShopifyRequestContext({
-    request: { headers: new Headers() },
+    request: request ?? { headers: new Headers() },
     i18n: { country: "US", language: "EN" },
   });
 

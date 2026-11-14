@@ -1,0 +1,30 @@
+/* Shared tablet/mobile drawer; height follows each device's visible viewport. */
+.soundx-mobile-menu {
+  --header-menu-duration: 300ms;
+  transform: translateX(-100%);
+  opacity: 0;
+  transition:
+    transform var(--header-menu-duration) cubic-bezier(0.22, 1, 0.36, 1),
+    opacity var(--header-menu-duration) ease-out;
+}
+
+.soundx-mobile-menu[data-state="open"] {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.soundx-mobile-menu::backdrop {
+  background-color: rgb(0 0 0 / 0%);
+  transition: background-color var(--header-menu-duration, 300ms) ease-out;
+}
+
+.soundx-mobile-menu[data-state="open"]::backdrop {
+  background-color: rgb(0 0 0 / 50%);
+}
+
+@media (prefers-reduced-motion: reduce), (min-width: 90rem) {
+  .soundx-mobile-menu,
+  .soundx-mobile-menu::backdrop {
+    transition: none;
+  }
+}
