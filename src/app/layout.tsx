@@ -1,5 +1,6 @@
 import { WeaverseNextStudioConnect } from "@weaverse/hydrogen/next";
 import type { Metadata } from "next";
+import { io } from "next/cache";
 import localFont from "next/font/local";
 import Image from "next/image";
 
@@ -35,6 +36,9 @@ export const metadata: Metadata = {
   description: "SoundX is an electronics and tech storefront.",
 };
 async function ThemeLayout({ children }: { children: React.ReactNode }) {
+  // CI may have no theme env, so its loader can return before headers().
+  // Explicitly defer time-dependent layout output beyond the static shell.
+  await io();
   let themeData = await loadWeaverseThemeSettings({
     type: "INDEX",
     pathname: "/",

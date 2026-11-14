@@ -541,3 +541,26 @@ settings were changed. Format:check, lint, typecheck/GraphQL and all 43 tests
 passed; git diff --check passed. No preview edits, commit, push or publish.
 Build success above is user-reported before this CSS-only fix; the agent did
 not rerun production build for the final spacing change.
+
+
+## 2026-11-14 — Fix CI prerender failure for unconfigured root layout
+
+User supplied job 132315835653's failure: tests passed but /_not-found failed
+production prerender due to new Date(). The date read is the shared Footer's
+copyrightYear in src/app/layout.tsx, not a custom not-found implementation.
+CI has no injected storefront env. loadWeaverseThemeSettings returns early when
+the project ID is absent, before headers() can establish a request-time boundary.
+Added await io() from next/cache at the beginning of ThemeLayout, under the
+existing Suspense. This follows installed Next 16.4.4 Cache Components guidance
+and keeps time-dependent output outside the static shell without hardcoding the
+year or suppressing the diagnostic. io() also preserves prefetch compatibility.
+
+Added an isolated regression case checking that io runs before an unconfigured
+theme loader and the three menu reads, the layout remains under Suspense, and
+the current copyright year is passed to Footer. Format:check, lint,
+typecheck/GraphQL and 44 tests passed. Production build was run successfully with
+WEAVERSE_PROJECT_ID, PUBLIC_STORE_DOMAIN, PUBLIC_STOREFRONT_API_TOKEN and
+PRIVATE_STOREFRONT_API_TOKEN set to empty process values (no environment file
+modified), exercising the CI missing-configuration path. / and /_not-found were
+successfully generated as Partial Prerender routes. CI remote rerun pending.
+No commit, push, deployment or external service change was performed.
