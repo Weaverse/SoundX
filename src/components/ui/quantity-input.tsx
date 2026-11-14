@@ -17,6 +17,7 @@ export type QuantityInputProps = Omit<
   step?: number;
   incrementLabel: string;
   decrementLabel: string;
+  onValueChange?: (quantity: number | undefined) => void;
 };
 
 export function QuantityInput({
@@ -31,6 +32,7 @@ export function QuantityInput({
   readOnly,
   onChange,
   onBlur,
+  onValueChange,
   className,
   ...props
 }: QuantityInputProps) {
@@ -41,14 +43,40 @@ export function QuantityInput({
   let incrementDisabled =
     disabled || readOnly || (max !== undefined && currentQuantity >= max);
 
+  function updateQuantity(value: string) {
+    let previous = quantity === "" ? undefined : Number(quantity);
+    let next = value === "" ? undefined : Number(value);
+
+    let previousValue =
+      previous !== undefined && Number.isFinite(previous)
+        ? previous
+        : undefined;
+
+    let nextValue =
+      next !== undefined && Number.isFinite(next) ? next : undefined;
+
+    setQuantity(value);
+
+    if (previousValue !== nextValue) {
+      onValueChange?.(nextValue);
+    }
+  }
+
   function changeQuantity(direction: -1 | 1) {
-    setQuantity((previous) => {
-      let current = previous === "" ? min : Number(previous);
-      let next = Number((current + direction * step).toFixed(12));
-      return String(
-        Math.min(max ?? Number.POSITIVE_INFINITY, Math.max(min, next)),
-      );
-    });
+    if (disabled || readOnly) {
+      return;
+    }
+
+    let current = Number.isFinite(currentQuantity) ? currentQuantity : min;
+
+    let next = Number((current + direction * step).toFixed(12));
+
+    let bounded = Math.min(
+      max ?? Number.POSITIVE_INFINITY,
+      Math.max(min, next),
+    );
+
+    updateQuantity(String(bounded));
   }
 
   return (
@@ -89,14 +117,16 @@ export function QuantityInput({
         disabled={disabled}
         readOnly={readOnly}
         onChange={(event) => {
-          setQuantity(event.currentTarget.value);
+          updateQuantity(event.currentTarget.value);
           onChange?.(event);
         }}
         onBlur={(event) => {
-          if (!readOnly) {
+          if (!readOnly && !disabled) {
             let next = event.currentTarget.valueAsNumber;
-            setQuantity(Number.isFinite(next) ? String(next) : "1");
+
+            updateQuantity(Number.isFinite(next) ? String(next) : String(min));
           }
+
           onBlur?.(event);
         }}
         className={cn(
