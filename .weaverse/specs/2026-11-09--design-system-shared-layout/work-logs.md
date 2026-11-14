@@ -564,3 +564,20 @@ PRIVATE_STOREFRONT_API_TOKEN set to empty process values (no environment file
 modified), exercising the CI missing-configuration path. / and /_not-found were
 successfully generated as Partial Prerender routes. CI remote rerun pending.
 No commit, push, deployment or external service change was performed.
+
+
+## 2026-11-14 — Verify reviewer P1 Shopify product-image configuration
+
+User added scoped Next Image remotePatterns for HTTPS cdn.shopify.com under
+/s/files/1/0940/9318/1222/**, and reported that main and hover product images
+worked in the browser. Agent ran requested checks. Fixed only the missing final
+newline in next.config.ts. format:check, lint, typecheck/GraphQL, all 44 tests,
+production build and git diff --check passed. Production build completed all
+seven generated routes, including /_not-found, with .env.local present.
+
+A direct check using Next's actual matchRemotePattern accepted the two real
+SoundX product-image URLs, including a version query parameter, and rejected
+another hostname, another store tenant path and HTTP. Main/hover browser success
+is user-reported; no fresh agent browser/Studio test was performed in this pass.
+No ProductCard, preview, quantity-control or external service changes; no commit
+or push. The quantity-control reviewer findings remain a separate task.
