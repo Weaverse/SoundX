@@ -4,7 +4,7 @@
 - Owner: @HoangHuy1305HP
 - Technical reviewer: @hta218
 - Created: 2026-11-09
-- Last Updated: 2026-11-10
+- Last Updated: 2026-11-14
 - Source issue: https://github.com/Weaverse/SoundX/issues/2
 - Design review: https://github.com/Weaverse/SoundX/issues/9
 
@@ -36,6 +36,12 @@ SoundX's implementation. No Shopify or Weaverse integration is changed here.
 
 ## UI decisions pending designer confirmation
 
+- Concrete Figma instances take priority over the general style guide. Record
+  disagreements rather than silently normalizing instance-specific appearance.
+- Product Add to Bag instance `3980:27541` uses Text/Inverse (#FAFAFA), while the
+  guide specifies Primary/text (#FFFFFF). Primary currently follows the instance.
+  Its parent is 48px high, while the nested button uses 16px vertical padding
+  and normal text line height; confirm final height before forcing a fixed size.
 - Underlined input keyboard focus: proposed bottom line increases from 1px to
   2px. The user prefers this to a surrounding outline. This is a proposal, not
   a confirmed Figma focus variant. Confirm sufficient visual prominence.
@@ -51,9 +57,30 @@ SoundX's implementation. No Shopify or Weaverse integration is changed here.
 
 ## Remaining scope
 
-Filter NumberInput, Badge and ProductCard remain unimplemented. QuantityInput
-has a 140px-wide layout and shared minus/plus icons, but its buttons do not yet
-change the number. Its inner input outline was removed at the user's request;
+Filter NumberInput has been added locally by the user from the proposed
+component; leading-zero blur normalization is implemented, with browser review
+pending. Badge and ProductCard remain unimplemented. QuantityInput
+now includes square (171×47px, 4px radius) and compact (72×34px, stacked arrow
+buttons) variants based on `1253:21883` and `1758:20011`. These are quantity
+controls, not From/To price filters. Their visual/browser review is pending.
+The default QuantityInput
+has a 140px-wide layout, shared minus/plus icons and internal state for numeric
+input and step-based increments/decrements bounded by min/max. Direct typing
+preserves the draft without clamping; blur normalizes leading zeros and restores
+an empty field to 1. The preview has no upper limit. Its inner input
+outline was removed at the user's request;
 a keyboard focus treatment still needs to be agreed with the designer. Shared
 layout, settings, responsive integration, navigation continuity and designer
 handoff remain open. Existing checks do not prove browser focus or visual parity.
+
+
+## 2026-11-13 shared layout hardening
+
+Header and Footer navigation now share a public menu refresh endpoint and a
+client composition hook for Studio menu-handle changes. Initial menus load in
+parallel with independent failure isolation. Remote custom logos bypass the Next
+image optimizer, and the Footer wordmark scales within its container. Payment
+markup and production-source formatting were corrected. This is not issue #2
+acceptance: desktop mega menu, appearance controls, locale continuity, live
+newsletter submission, actual accepted-payment mapping and reviewer handoff
+remain separate work. See the work log for verification limits.

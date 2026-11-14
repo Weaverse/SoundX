@@ -2,7 +2,7 @@
 
 @theme inline {
   /* Container */
-  --container-page: 87.5rem; /* 1400px */
+  --container-page: var(--soundx-page-width, 87.5rem);
 
   /* Padding py */
   --spacing-section-mobile: 4rem; /* 64px */
@@ -25,56 +25,86 @@
   --radius-xs: 0.25rem;
   --radius-sm: 0.5rem;
   --radius-md: 1rem;
+  --radius-button: var(--soundx-button-radius, 1rem);
 
   /* Text and surfaces */
-  --color-background: #ffffff;
+  --color-background: var(--soundx-background, #ffffff);
   --color-foreground: var(--color-text-main);
-  --color-text-main: #424242;
-  --color-text-subtle: #a5a2a7; /* mô tả phụ */
-  --color-text-inverse: #fafafa; /* màu chữ sáng trên nền tối */
-  --color-surface-light: #f3f1f3; /* màu nền của 1 vùng giao diện */
-  --color-surface-subtle: #f4f4f6;
+  --color-text-main: var(--soundx-text-main, #424242);
+  --color-text-subtle: var(--soundx-text-subtle, #a5a2a7);
+  --color-text-inverse: var(--soundx-text-inverse, #fafafa);
+  --color-surface-light: var(--soundx-surface-light, #f3f1f3);
+  --color-surface-subtle: var(--soundx-surface-subtle, #f4f4f6);
 
   /* Primary actions */
-  --color-primary-background: #262627;
-  --color-primary-background-hover: #161616;
-  --color-primary-text: #ffffff;
+  --color-primary-background: var(--soundx-primary-background, #262627);
+  --color-primary-background-hover: var(
+    --soundx-primary-background-hover,
+    #161616
+  );
+  --color-primary-text: var(--soundx-primary-text, #fafafa);
 
   /* Secondary actions */
-  --color-secondary-background: #ffffff;
-  --color-secondary-background-hover: #262627;
-  --color-secondary-text: #262627;
-  --color-secondary-text-hover: #ffffff;
-  --color-secondary-border: #262627;
-  --color-secondary-border-hover: #262627;
+  --color-secondary-background: var(--soundx-secondary-background, #ffffff);
+  --color-secondary-background-hover: var(
+    --soundx-secondary-background-hover,
+    #262627
+  );
+  --color-secondary-text: var(--soundx-secondary-text, #262627);
+  --color-secondary-text-hover: var(--soundx-secondary-text-hover, #ffffff);
+  --color-secondary-border: var(--soundx-secondary-border, #262627);
+  --color-secondary-border-hover: var(--soundx-secondary-border-hover, #262627);
 
   /* Outlined actions */
-  --color-outlined-text: #1e252b;
-  --color-outlined-text-hover: #1e252b;
-  --color-outlined-border: #1e252b;
-  --color-outlined-border-hover: #1e252b;
-  --color-outlined-background-hover: #f2f4f5;
+  --color-outlined-text: var(--soundx-outlined-text, #1e252b);
+  --color-outlined-text-hover: var(--soundx-outlined-text-hover, #1e252b);
+  --color-outlined-border: var(--soundx-outlined-border, #1e252b);
+  --color-outlined-border-hover: var(--soundx-outlined-border-hover, #1e252b);
+  --color-outlined-background-hover: var(
+    --soundx-outlined-background-hover,
+    #f2f4f5
+  );
 
   /* Order-note textarea: separate tokens from the Message field. */
   --radius-textarea-note: 0.75rem; /* 12px */
-  --color-textarea-note-border: #dedede;
-  --color-textarea-note-text: #5e5e5e;
+  --color-textarea-note-border: var(--soundx-textarea-note-border, #dedede);
+  --color-textarea-note-text: var(--soundx-textarea-note-text, #5e5e5e);
 
   /* Labels and borders */
-  --color-label-accent: #262627; /* màu nhấn cho nhãn sp */
-  --color-label-sale: #2da948; /* màu nhấn cho nhãn giảm giá */
-  --color-border-primary: #262627;
-  --color-border-subtle: #e6e2e8;
+  --color-label-accent: var(
+    --soundx-label-accent,
+    #262627
+  ); /* màu nhấn cho nhãn sp */
+  --color-label-sale: var(
+    --soundx-label-sale,
+    #2da948
+  ); /* màu nhấn cho nhãn giảm giá */
+  --color-border-primary: var(--soundx-border-primary, #262627);
+  --color-border-subtle: var(--soundx-border-subtle, #e6e2e8);
 
   /* Shared layout */
-  --color-announcement-text: #ffffff;
-  --color-announcement-background: #262627;
-  --color-header-text: #ffffff;
-  --color-header-background: #262627;
-  --color-footer-text: #ffffff;
-  --color-footer-background: #262627;
-  --font-sans: var(--font-inter);
-  --font-body: var(--font-open-sans);
+  --color-announcement-text: var(--soundx-announcement-text, #e2e8f0);
+  --color-announcement-background: var(
+    --soundx-announcement-background,
+    #262627
+  );
+  --color-header-text: var(--soundx-header-text, #fafafa);
+  --color-header-background: var(--soundx-header-background, #0b0b0d);
+  --color-footer-text: var(--soundx-footer-text, #fafafa);
+  --color-footer-background: var(--soundx-footer-background, #34285e);
+  --font-heading: var(
+    --soundx-font-heading,
+    var(--font-inter),
+    system-ui,
+    sans-serif
+  );
+  --font-sans: var(--soundx-font-ui, var(--font-inter), system-ui, sans-serif);
+  --font-body: var(
+    --soundx-font-body,
+    var(--font-open-sans),
+    system-ui,
+    sans-serif
+  );
 
   --text-heading-h1: 4rem;
   --text-heading-h1--line-height: 1.1;
@@ -149,5 +179,10 @@
 body {
   background: var(--color-background);
   color: var(--color-text-main);
-  font-family: var(--font-open-sans), system-ui, sans-serif;
+  font-family: var(
+    --soundx-font-body,
+    var(--font-open-sans),
+    system-ui,
+    sans-serif
+  );
 }

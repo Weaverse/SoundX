@@ -20,7 +20,7 @@ export function InputUnderline({
         "placeholder:text-text-inverse placeholder:opacity-100",
         // Figma's bottom stroke sits inside the 29px Hug height.
         "[box-shadow:inset_0_-1px_0_0_var(--color-text-inverse)]",
-        "outline-none focus-visible:[box-shadow:inset_0_-2px_0_0_var(--color-text-inverse)]",
+        "outline-none enabled:hover:[box-shadow:inset_0_-2px_0_0_var(--color-text-inverse)] focus-visible:[box-shadow:inset_0_-2px_0_0_var(--color-text-inverse)]",
         "transition-shadow duration-200 ease-out motion-reduce:transition-none",
         "disabled:cursor-not-allowed",
         className,

@@ -1,5 +1,6 @@
 import type { ComponentProps } from "react";
 import { cn } from "@/lib/cn";
+
 type ButtonVariant = "primary" | "secondary" | "outlined";
 type ButtonSize = "default" | "sm" | "icon";
 
@@ -13,7 +14,7 @@ export type ButtonProps = ComponentProps<"button"> & {
 
 const VARIANT_STYLES: Record<ButtonVariant, string> = {
   primary:
-    "bg-primary-background text-text-inverse enabled:hover:bg-primary-background-hover enabled:active:bg-primary-background-hover",
+    "bg-primary-background text-primary-text enabled:hover:bg-primary-background-hover enabled:active:bg-primary-background-hover",
   secondary:
     "bg-secondary-background text-secondary-text enabled:hover:bg-secondary-background-hover enabled:hover:text-secondary-text-hover enabled:active:bg-secondary-background-hover enabled:active:text-secondary-text-hover",
   outlined:
@@ -41,7 +42,7 @@ export function Button({
       {...props}
       type={type}
       className={cn(
-        "inline-flex flex-none items-center justify-center gap-2 whitespace-nowrap rounded-md border-0",
+        "inline-flex flex-none items-center justify-center gap-2 whitespace-nowrap rounded-button border-0",
         fullWidth ? "w-full" : "w-fit",
         "font-sans text-ui-base-medium tracking-normal",
         "cursor-pointer transition-colors duration-150 ease-out motion-reduce:transition-none",
