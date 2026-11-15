@@ -1,0 +1,65 @@
+/* Keep this breakpoint aligned with SoundX's --breakpoint-lg (90rem). */
+.soundx-announcement-viewport {
+  container-type: inline-size;
+  overflow-x: auto;
+}
+
+.soundx-announcement-track {
+  display: flex;
+  width: max-content;
+  animation: announcement-scroll 35s linear infinite;
+}
+
+.soundx-announcement-group {
+  flex-shrink: 0;
+  min-width: 100cqw;
+  padding-inline-end: 24px;
+}
+
+.soundx-announcement-bar[data-paused="true"] .soundx-announcement-track,
+.soundx-announcement-bar:hover .soundx-announcement-track,
+.soundx-announcement-bar:focus-within .soundx-announcement-track {
+  animation-play-state: paused;
+}
+
+/* Restore the original list position for reachable, stable keyboard links. */
+.soundx-announcement-viewport:focus-within .soundx-announcement-track {
+  animation: none;
+}
+
+@keyframes announcement-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (min-width: 90rem) {
+  .soundx-announcement-track {
+    animation: none;
+  }
+
+  .soundx-announcement-group {
+    min-width: 0;
+    padding-inline-end: 0;
+  }
+
+  .soundx-announcement-copy,
+  .soundx-announcement-control {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .soundx-announcement-track {
+    animation: none;
+  }
+
+  .soundx-announcement-copy,
+  .soundx-announcement-control {
+    display: none;
+  }
+
+  .soundx-announcement-group {
+    padding-inline-end: 0;
+  }
+}

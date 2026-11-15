@@ -20,7 +20,7 @@ Publish page content in Weaverse to make it visible outside Studio.
 | Bun | 1.3.14 |
 | Next.js | 16.4.4 |
 | React / React DOM | 19.3.0 |
-| Weaverse Next SDK | 1.0.1 |
+| Weaverse SDK (`@weaverse/hydrogen`) | 6.2.0 |
 | Shopify Hydrogen | 2026.10.2 |
 | TypeScript | 5.9.3 |
 | Biome | 2.6.3 |
@@ -67,7 +67,7 @@ Keep the dev server running while using the local Studio preview.
 | bun run format | Apply Biome formatting. |
 | bun run format:check | Check formatting without modifying files. |
 | bun run lint | Check Biome lint rules. |
-| bun run test | Run the foundation tests. |
+| bun run test | Run the automated test suite. |
 | bun run typecheck | Generate Next.js route types, check TypeScript, and validate Shopify GraphQL queries. |
 | bun run check:graphql | Validate Shopify queries against the schemas bundled with Hydrogen. |
 | bun run build | Create the production build. |
@@ -80,6 +80,59 @@ See `.github/workflows/ci.yml` for triggers and configuration.
 To verify Shopify access, open `/api/shopify-check` on the local development
 server. A successful response contains a catalog sample or `product: null`
 for an empty catalog. The route returns 404 in production.
+
+### Shopify navigation
+
+Manage menu titles, links, ordering and nested items in Shopify Admin under
+**Content → Menus**. The shared layout uses these default handles:
+
+| Surface | Default handle | Structure |
+| --- | --- | --- |
+| Header | `main-menu` | Main links with optional nested items for the mobile/tablet drawer. |
+| Footer navigation | `footer-navigation` | Top-level groups with child links. |
+| Footer legal links | `footer-legal` | A flat list of policy and legal links. |
+
+Use the actual collection, page, policy or external destination for each link.
+The Home link in the mobile/tablet drawer is supplied by the theme.
+
+Menu handles can be changed in the Header and Footer groups of Weaverse Studio's
+**Theme settings**. Menus are read on the server; changing a handle in Studio
+refreshes its menu through the same-origin navigation endpoint. A missing menu
+renders no links, and an upstream menu failure does not prevent the remaining
+layout from rendering. Shopify menu-content edits can be checked by reloading
+the preview.
+
+Locale controls and payment icons are separate from Shopify navigation menus.
+The payment icons currently follow the design's static list; they are not yet
+synchronized with the store's enabled payment methods.
+
+### Theme settings in Weaverse Studio
+
+Open the designated project in Studio, select the appropriate preview URL, then
+open **Theme settings**:
+
+| Group | Configuration |
+| --- | --- |
+| Layout | Maximum width for containers using the shared page-width token. Header/Footer retain their own layout unless explicitly connected. |
+| Colors | Shared background, text, border, action, label and layout color tokens. |
+| Typography | Heading, Body and UI font families, using the bundled Inter and Open Sans fonts. |
+| Buttons | Shared button corner radius, defaulting to 16px; explicit component overrides retain their own shape. |
+| Announcement Bar | Announcement content, links, visibility and playback labels. |
+| Header | Menu handle, optional logo, contact content and mobile/tablet menu labels. |
+| Footer | Navigation/legal handles, branding, newsletter copy and visibility options. |
+
+Appearance changes update the root theme settings store and the shared CSS
+variables. Components using those tokens update in the preview; component-specific
+styles can intentionally retain their approved design values. Typography settings
+change font families, not font sizes or weights. Theme wordmarks retain Inter.
+
+Publish the intended configuration in Studio and verify the deployed storefront
+afterward. Live-preview edits alone do not prove that published settings persist.
+The newsletter currently validates email input; actual subscription submission
+still requires a connected handler.
+
+See [.weaverse/specs/2026-11-09--design-system-shared-layout/](.weaverse/specs/2026-11-09--design-system-shared-layout/)
+for implementation status, verification results and remaining issue #2 work.
 
 ### Configure a deployed preview
 
