@@ -11,6 +11,93 @@ export const headerSettings = {
       helpText:
         "The Shopify menu used by the header. Manage its links, order and nested items in Shopify.",
     },
+    // NEW: bind the dropdown to a Shopify item without hardcoding its ID.
+    {
+      type: "text",
+      name: "headerCategoryMenuItem",
+      label: "Category dropdown menu item",
+      defaultValue: "Shop by Category",
+      helpText:
+        "Exact Shopify menu item title or ID. Use the ID to keep the binding when renaming the item. Clear to disable the category dropdown.",
+    },
+    {
+      type: "heading",
+      label: "Category menu banner",
+    },
+    {
+      type: "image",
+      name: "headerCategoryBannerImage",
+      label: "Banner image",
+      helpText: "Leave empty to hide the category menu banner.",
+    },
+    {
+      type: "text",
+      name: "headerCategoryBannerImageAlt",
+      label: "Banner image alternative text",
+      helpText: "Describe the image. Leave empty if it is decorative.",
+    },
+    {
+      type: "text",
+      name: "headerCategoryBannerEyebrow",
+      label: "Banner eyebrow",
+      defaultValue: "NEW ARRIVALS",
+    },
+    {
+      type: "text",
+      name: "headerCategoryBannerTitle",
+      label: "Banner title",
+      defaultValue: "Speakers",
+    },
+    {
+      type: "url",
+      name: "headerCategoryBannerLink",
+      label: "Banner link",
+      helpText: "Choose the destination collection or page.",
+    },
+    // Brand
+    {
+      type: "text",
+      name: "headerBrandMenuItem",
+      label: "Brand dropdown menu item",
+      defaultValue: "Shop by Brand",
+      helpText:
+        "Exact Shopify menu item title or ID. Use the ID to keep the binding when renaming the item. Clear to disable the brand dropdown.",
+    },
+    // Four image bindings for the approved brand panel; menu order stays in Shopify.
+    ...([1, 2, 3, 4] as const).flatMap((slot) => [
+      {
+        type: "heading" as const,
+        label: `Brand image ${slot}`,
+      },
+      {
+        type: "text" as const,
+        name: `headerBrand${slot}MenuItem`,
+        label: "Shopify brand menu item ID or title",
+        helpText:
+          "Match a child of Shop by Brand. Prefer its full Shopify ID so renaming or reordering keeps the correct image.",
+      },
+      {
+        type: "image" as const,
+        name: `headerBrand${slot}Image`,
+        label: "Brand image",
+        helpText: "Leave empty to show only the brand name and link.",
+      },
+      {
+        type: "text" as const,
+        name: `headerBrand${slot}ImageAlt`,
+        label: "Image alternative text",
+        helpText:
+          "Describe meaningful image content, or leave empty if the adjacent brand name is sufficient.",
+      },
+    ]),
+    {
+      type: "text",
+      name: "headerHelpMenuItem",
+      label: "Help Center dropdown menu item",
+      defaultValue: "Help Center",
+      helpText:
+        "Exact Shopify menu item title or ID. Its children and nested links are managed in Shopify. Clear to disable the Help Center dropdown.",
+    },
     {
       type: "image",
       name: "headerLogo",
@@ -73,6 +160,12 @@ export const headerSettings = {
       name: "headerMenuCloseLabel",
       label: "Close menu accessible label",
       defaultValue: "Close menu",
+    },
+    {
+      type: "text",
+      name: "headerMenuBackLabel",
+      label: "Back button accessible label",
+      defaultValue: "Back to menu",
     },
     {
       type: "text",

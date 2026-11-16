@@ -1,0 +1,23 @@
+.soundx-desktop-dropdown {
+  --dropdown-duration: 300ms;
+
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity var(--dropdown-duration) ease-in-out,
+    visibility 0s linear var(--dropdown-duration);
+}
+
+.soundx-desktop-dropdown[data-state="open"] {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .soundx-desktop-dropdown {
+    transition: none;
+  }
+}
