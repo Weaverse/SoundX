@@ -39,8 +39,12 @@ export default function Logo({ logo, homeHref, className }: LogoProps) {
         <>
           <Image src="/brand/soundx-mark.svg" alt="" width={44} height={44} />
 
-          <span className="whitespace-nowrap font-[family-name:var(--font-inter)] text-[32px] leading-none font-medium">
+          <span className="whitespace-nowrap font-[family-name:var(--font-inter)] text-[32px] leading-none font-medium lg:hidden">
             SoundX
+          </span>
+          <span className="hidden whitespace-nowrap font-[family-name:var(--font-inter)] text-[34px] leading-none lg:inline">
+            <span className="font-black">SOUND</span>
+            <span className="font-normal">X</span>
           </span>
         </>
       )}

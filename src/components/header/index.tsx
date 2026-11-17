@@ -13,12 +13,20 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 
+import type { BrandMenuItem } from "./brand-menu";
+import type { CategoryMenuBanner } from "./category-menu";
 import DesktopNav from "./desktop-nav";
 import Logo from "./logo";
 import MobileMenu from "./mobile-menu";
 import type { HeaderProps } from "./types";
 
 type HeaderViewProps = HeaderProps & {
+  // NEW: resolved category configuration is passed in by ConnectedHeader.
+  categoryMenuItemId?: string;
+  categoryBanner?: CategoryMenuBanner;
+  brandMenuItemId?: string;
+  helpMenuItemId?: string;
+  brands?: BrandMenuItem[];
   searchHref: string;
   navigationLabel: string;
   menuLabel: string;
@@ -47,6 +55,11 @@ export default function Header({
   accountHref,
   cartHref,
   cartQuantity,
+  categoryMenuItemId,
+  categoryBanner,
+  brandMenuItemId,
+  helpMenuItemId,
+  brands,
   searchHref,
   navigationLabel,
   menuLabel,
@@ -87,7 +100,7 @@ export default function Header({
   return (
     <header
       className={cn(
-        "bg-header-background py-2 text-header-text lg:py-3",
+        "relative z-40 bg-header-background py-2 text-header-text lg:py-3",
         className,
       )}
     >
@@ -132,7 +145,15 @@ export default function Header({
           <Logo logo={logo} homeHref={homeHref} />
         </div>
 
-        <DesktopNav menu={menu} label={navigationLabel} />
+        <DesktopNav
+          menu={menu}
+          label={navigationLabel}
+          categoryMenuItemId={categoryMenuItemId}
+          categoryBanner={categoryBanner}
+          brandMenuItemId={brandMenuItemId}
+          helpMenuItemId={helpMenuItemId}
+          brands={brands}
+        />
 
         <div
           className={cn(
@@ -193,6 +214,9 @@ export default function Header({
       <MobileMenu
         id={mobileMenuId}
         menu={menu}
+        categoryMenuItemId={categoryMenuItemId}
+        brandMenuItemId={brandMenuItemId}
+        brands={brands}
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
         homeHref={homeHref}

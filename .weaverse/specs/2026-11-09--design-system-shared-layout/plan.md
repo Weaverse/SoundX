@@ -84,3 +84,26 @@ Header/Footer connected and logo components, Footer bottom bar, root layout,
 Additional verification files: `tests/theme-styles.test.ts`,
 `tests/fixtures/theme-styles.mjs`, and updated `tests/text-block.test.ts`.
 The desktop mega-menu design remains unresolved/deferred, not accepted as done.
+
+
+### 2026-11-16 mobile navigation follow-up
+
+- Implemented mobile category accordion from newly supplied node 4735:18368.
+- Implemented shared Brand grid, right drawer radius and mobile typography.
+- Browser-checked mobile 430px and tablet 834px, nested links and dismissal.
+- Shopify All Collections remains visible despite omission from mockups;
+  resolve mobile menu visibility explicitly with the merchant.
+- Expanded Help Center styling uses the existing nested accordion pattern;
+  no separate expanded Help Center Figma node has been supplied.
+- Files touched: header/mobile-menu.tsx, mobile-menu.css, index.tsx and
+  brand-menu.tsx. Production build and Studio publishing remain pending.
+
+
+### Designer correction — mobile panels (2026-11-16)
+
+- Supersedes root-inline dropdowns: root parents now enter a named child view
+  with Back; only third-level branches expand as accordions inside it.
+- Category, Brand and Help Center share one native dialog and contact region.
+- Browser-verified root/child/back, reset on reopen and Escape at mobile/tablet.
+- Added headerMenuBackLabel setting; mobile-menu.tsx, mobile-menu.css,
+  connected.tsx and settings/header.ts updated.
