@@ -854,3 +854,16 @@ Unrelated preview, product fixtures, TextBlock/test and image-banner work must
 remain out of the header commit. Existing desktop hover/click toggle behavior
 remains noted. No commit or push was performed; prior PR was already merged
 per the user, so this follow-up needs a new review PR.
+
+
+## 2026-11-22 — Header navigation PR review
+
+- Updated the spec to record the desktop and mobile navigation included in
+  PR #18, list the changed desktop files and refresh the spec date.
+- Prior PR checks verified desktop Tab order, focus restoration and
+  hover-then-click behavior, and mobile parent navigation and Back focus.
+- The Back-label change passed format check, lint, typecheck and all
+  44 tests. Production build passed on retry after the Next.js 16.4.4
+  security notice. A local Chrome fixture confirmed the default and custom
+  Back labels and focus restoration using simulated Studio settings.
+- Live Studio publishing and a full cross-browser visual pass are pending.

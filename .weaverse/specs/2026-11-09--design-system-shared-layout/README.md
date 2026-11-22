@@ -4,7 +4,7 @@
 - Owner: @HoangHuy1305HP
 - Technical reviewer: @hta218
 - Created: 2026-11-09
-- Last Updated: 2026-11-14
+- Last Updated: 2026-11-22
 - Source issue: https://github.com/Weaverse/SoundX/issues/2
 - Design review: https://github.com/Weaverse/SoundX/issues/9
 
@@ -21,10 +21,9 @@ Implement the shared visual foundation from the approved design.
 
 ## Current scope
 
-This entry records the review and cleanup of existing shared UI controls.
-Typography and color guides remain the source for visual values. Forward's
-`src/lib/cn.ts` was checked for class-composition conventions; its helper matches
-SoundX's implementation. No Shopify or Weaverse integration is changed here.
+This spec covers shared UI controls and shared layout. Typography and color
+guides are the source for visual values. The Header uses Shopify navigation with
+Weaverse Studio settings for menu bindings and content.
 
 ## Confirmed implementation
 
@@ -33,6 +32,9 @@ SoundX's implementation. No Shopify or Weaverse integration is changed here.
 - Message textarea keeps its 16px radius on hover, matching the current Input
   component set; the previous 4px hover override was removed.
 - Order-note retains its distinct 12px radius, 12px padding and 1px border.
+- The desktop Header implements Category, Brand and Help Center mega-menu
+  panels. Mobile and tablet use a drill-down dialog with a Studio-configurable
+  Back label and focus restoration. [PR #18](https://github.com/Weaverse/SoundX/pull/18)
 
 ## UI decisions pending designer confirmation
 
@@ -80,7 +82,7 @@ Header and Footer navigation now share a public menu refresh endpoint and a
 client composition hook for Studio menu-handle changes. Initial menus load in
 parallel with independent failure isolation. Remote custom logos bypass the Next
 image optimizer, and the Footer wordmark scales within its container. Payment
-markup and production-source formatting were corrected. This is not issue #2
-acceptance: desktop mega menu, appearance controls, locale continuity, live
-newsletter submission, actual accepted-payment mapping and reviewer handoff
-remain separate work. See the work log for verification limits.
+markup and production-source formatting were corrected. The later desktop
+mega-menu implementation is recorded in the [plan](plan.md). Locale continuity,
+live newsletter submission, accepted-payment mapping and designer handoff remain
+open in the shared-layout scope. See the work log for verification details.
