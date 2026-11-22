@@ -10,7 +10,7 @@ export type CategoryMenuBanner = {
     src: string;
     alt: string;
   };
-  href: string;
+  href?: string;
   eyebrow?: string;
   title?: string;
 };
@@ -27,6 +27,11 @@ const INTERACTION_CLASS = cn(
   "motion-reduce:transition-none",
 );
 
+const BANNER_CLASS = cn(
+  "relative block min-h-[288px] w-[400px] shrink-0",
+  "overflow-hidden rounded-[20px] bg-surface-light text-text-inverse",
+);
+
 export default function CategoryMenu({
   groups,
   banner,
@@ -35,6 +40,32 @@ export default function CategoryMenu({
   if (groups.length === 0 && !banner) {
     return null;
   }
+
+  let bannerContent = banner && (
+    <>
+      <Image
+        src={banner.image.src}
+        alt={banner.image.alt}
+        unoptimized
+        fill
+        sizes="400px"
+        className="object-cover"
+      />
+      <span aria-hidden="true" className="absolute inset-0 bg-black/20" />
+      <div className="relative flex min-h-[288px] flex-col justify-between gap-8 p-10">
+        {banner.eyebrow ? (
+          <span className="font-sans text-sm font-medium leading-normal">
+            {banner.eyebrow}
+          </span>
+        ) : null}
+        {banner.title ? (
+          <span className="mt-auto font-sans text-[26px] font-medium leading-[33px]">
+            {banner.title}
+          </span>
+        ) : null}
+      </div>
+    </>
+  );
 
   return (
     <div
@@ -82,38 +113,20 @@ export default function CategoryMenu({
           ))}
         </ul>
 
-        {banner ? (
-          <Link
-            href={banner.href}
-            className={cn(
-              "relative block min-h-[288px] w-[400px] shrink-0",
-              "overflow-hidden rounded-[20px] bg-surface-light text-text-inverse",
-              "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-main",
-            )}
-          >
-            <Image
-              src={banner.image.src}
-              alt={banner.image.alt}
-              unoptimized
-              fill
-              sizes="400px"
-              className="object-cover"
-            />
-            <span aria-hidden="true" className="absolute inset-0 bg-black/20" />
-            <div className="relative flex min-h-[288px] flex-col justify-between gap-8 p-10">
-              {banner.eyebrow ? (
-                <span className="font-sans text-sm font-medium leading-normal">
-                  {banner.eyebrow}
-                </span>
-              ) : null}
-              {banner.title ? (
-                <span className="mt-auto font-sans text-[26px] font-medium leading-[33px]">
-                  {banner.title}
-                </span>
-              ) : null}
-            </div>
-          </Link>
-        ) : null}
+        {banner &&
+          (banner.href ? (
+            <Link
+              href={banner.href}
+              className={cn(
+                BANNER_CLASS,
+                "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-main",
+              )}
+            >
+              {bannerContent}
+            </Link>
+          ) : (
+            <div className={BANNER_CLASS}>{bannerContent}</div>
+          ))}
       </div>
     </div>
   );

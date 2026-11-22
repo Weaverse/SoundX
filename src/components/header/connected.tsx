@@ -118,7 +118,7 @@ export default function ConnectedHeader({
 
   let categoryBanner: CategoryMenuBanner | undefined;
 
-  if (bannerSrc && bannerHref) {
+  if (bannerSrc) {
     categoryBanner = {
       image: {
         src: bannerSrc,
@@ -127,7 +127,7 @@ export default function ConnectedHeader({
           bannerImage?.altText ??
           "",
       },
-      href: bannerHref,
+      href: bannerHref || undefined,
       eyebrow: settings.headerCategoryBannerEyebrow,
       title: settings.headerCategoryBannerTitle,
     };

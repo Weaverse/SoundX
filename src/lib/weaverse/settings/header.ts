@@ -52,7 +52,8 @@ export const headerSettings = {
       type: "url",
       name: "headerCategoryBannerLink",
       label: "Banner link",
-      helpText: "Choose the destination collection or page.",
+      helpText:
+        "Optional. Choose a collection or page to make the banner clickable.",
     },
     // Brand
     {
