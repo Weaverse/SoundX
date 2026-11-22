@@ -72,6 +72,8 @@ export default function DesktopNav({
 
   useEffect(() => {
     if (!activeMenuId) return;
+    let openMenuId = activeMenuId;
+
     function handlePointerDown(event: PointerEvent) {
       if (
         event.target instanceof Node &&
@@ -84,14 +86,13 @@ export default function DesktopNav({
       if (event.key === "Escape") {
         event.preventDefault();
         closeMenus();
-        if (activeMenuId) triggerRefs.current[activeMenuId]?.focus();
+        triggerRefs.current[openMenuId]?.focus();
       }
     }
     function handleClick(event: MouseEvent) {
       if (
-        activeMenuId &&
         event.target instanceof Element &&
-        panelRefs.current[activeMenuId]?.contains(event.target) &&
+        panelRefs.current[openMenuId]?.contains(event.target) &&
         event.target.closest("a[href]")
       )
         closeMenus();
