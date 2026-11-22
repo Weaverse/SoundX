@@ -90,6 +90,7 @@
   );
   --color-header-text: var(--soundx-header-text, #fafafa);
   --color-header-background: var(--soundx-header-background, #0b0b0d);
+  --color-header-accent: #34285e;
   --color-footer-text: var(--soundx-footer-text, #fafafa);
   --color-footer-background: var(--soundx-footer-background, #34285e);
   --font-heading: var(

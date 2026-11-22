@@ -78,7 +78,7 @@ export default function BrandMenu({
                     />
                   </div>
                 ) : null}
-                <span className="font-body text-base font-semibold text-center leading-[1.5] transition-colors duration-200 ease-out group-hover:text-[var(--brand-menu-accent,#34285e)] motion-reduce:transition-none">
+                <span className="font-body text-base font-semibold text-center leading-[1.5] transition-colors duration-200 ease-out group-hover:text-header-accent motion-reduce:transition-none">
                   {brand.title}
                 </span>
               </Link>

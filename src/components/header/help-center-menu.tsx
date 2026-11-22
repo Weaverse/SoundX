@@ -17,7 +17,7 @@ type HelpCenterMenuProps = {
 const ITEM_CLASS = cn(
   "flex w-full items-center justify-between gap-2.5 text-left",
   "font-sans text-sm font-normal leading-[1.5] text-text-main",
-  "transition-colors duration-200 hover:text-[var(--help-menu-accent,#34285e)]",
+  "transition-colors duration-200 hover:text-header-accent",
   "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current",
   "motion-reduce:transition-none",
 );

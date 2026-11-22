@@ -22,7 +22,7 @@ type CategoryMenuProps = {
 };
 
 const INTERACTION_CLASS = cn(
-  "transition-colors duration-200 ease-out hover:text-[var(--category-menu-accent)]",
+  "transition-colors duration-200 ease-out hover:text-header-accent",
   "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current",
   "motion-reduce:transition-none",
 );
@@ -71,7 +71,6 @@ export default function CategoryMenu({
     <div
       className={cn(
         "bg-background shadow-[0_4px_2px_rgba(0,0,0,0.04)]",
-        "[--category-menu-accent:#34285e]",
         className,
       )}
     >
@@ -86,7 +85,7 @@ export default function CategoryMenu({
                 href={group.href}
                 className={cn(
                   INTERACTION_CLASS,
-                  "font-sans text-[20px] leading-[30px] font-medium text-[var(--category-menu-accent)]",
+                  "font-sans text-[20px] leading-[30px] font-medium text-header-accent",
                 )}
               >
                 {group.title}
