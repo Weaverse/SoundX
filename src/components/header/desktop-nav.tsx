@@ -43,13 +43,11 @@ export default function DesktopNav({
   let openedByHover = useRef<string | null>(null);
   let panelPrefix = useId();
   let pathname = usePathname();
-  let categoryItem = menu.find((item) => item.id === categoryMenuItemId);
-  let brandItem = menu.find((item) => item.id === brandMenuItemId);
   let dropdowns = menu.filter(
     (item) =>
-      (item.id === categoryItem?.id &&
+      (item.id === categoryMenuItemId &&
         (item.children.length > 0 || !!categoryBanner)) ||
-      (item.id === brandItem?.id && brands.length > 0) ||
+      (item.id === brandMenuItemId && brands.length > 0) ||
       (item.id === helpMenuItemId && item.children.length > 0),
   );
 
