@@ -69,17 +69,18 @@ export default function ConnectedHeader({
   let handle = settings.headerMenuHandle?.trim() || "main-menu";
   let menu = useNavigation(handle, menuHandle, props.menu);
 
+  function findMenuItem(selector?: string) {
+    return menu.find((item) => item.id === selector || item.title === selector);
+  }
+
   // NEW: accept a stable Shopify item ID, or an exact merchant-configured title.
-  let categorySelector =
-    settings.headerCategoryMenuItem?.trim() ?? "Shop by Category";
-  let categoryMenuItem = menu.find(
-    (item) => item.id === categorySelector || item.title === categorySelector,
+  let categoryMenuItem = findMenuItem(
+    settings.headerCategoryMenuItem?.trim() ?? "Shop by Category",
   );
 
   // NEW: brand labels, links and order remain Shopify-owned.
-  let brandSelector = settings.headerBrandMenuItem?.trim() ?? "Shop by Brand";
-  let brandMenuItem = menu.find(
-    (item) => item.id === brandSelector || item.title === brandSelector,
+  let brandMenuItem = findMenuItem(
+    settings.headerBrandMenuItem?.trim() ?? "Shop by Brand",
   );
   // Match images by menu identity, never by position in the Shopify menu.
   let brandImages = ([1, 2, 3, 4] as const).map((slot) => ({
@@ -108,9 +109,8 @@ export default function ConnectedHeader({
     },
   );
 
-  let helpSelector = settings.headerHelpMenuItem?.trim() ?? "Help Center";
-  let helpMenuItem = menu.find(
-    (item) => item.id === helpSelector || item.title === helpSelector,
+  let helpMenuItem = findMenuItem(
+    settings.headerHelpMenuItem?.trim() ?? "Help Center",
   );
   let bannerImage = settings.headerCategoryBannerImage;
   let bannerSrc = bannerImage?.url?.trim();
