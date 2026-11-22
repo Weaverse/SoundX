@@ -35,7 +35,6 @@ export default function DesktopNav({
   helpMenuItemId,
   brands = [],
 }: DesktopNavProps) {
-  // NEW: share hover/focus behavior; only one menu is active at a time.
   let [activeMenuId, setActiveMenuId] = useState<string | null>(null);
   let triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   let panelRefs = useRef<Record<string, HTMLDivElement | null>>({});

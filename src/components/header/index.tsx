@@ -21,7 +21,7 @@ import MobileMenu from "./mobile-menu";
 import type { HeaderProps } from "./types";
 
 type HeaderViewProps = HeaderProps & {
-  // NEW: resolved category configuration is passed in by ConnectedHeader.
+  // ConnectedHeader resolves the Category, Brand, and Help Center menu settings.
   categoryMenuItemId?: string;
   categoryBanner?: CategoryMenuBanner;
   brandMenuItemId?: string;

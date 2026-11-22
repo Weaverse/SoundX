@@ -73,12 +73,10 @@ export default function ConnectedHeader({
     return menu.find((item) => item.id === selector || item.title === selector);
   }
 
-  // NEW: accept a stable Shopify item ID, or an exact merchant-configured title.
   let categoryMenuItem = findMenuItem(
     settings.headerCategoryMenuItem?.trim() ?? "Shop by Category",
   );
 
-  // NEW: brand labels, links and order remain Shopify-owned.
   let brandMenuItem = findMenuItem(
     settings.headerBrandMenuItem?.trim() ?? "Shop by Brand",
   );
