@@ -34,7 +34,7 @@ type MobileMenuLabels = {
   home: string;
   expand: string;
   collapse: string;
-  back?: string;
+  back: string;
 };
 
 type MobileMenuProps = {
@@ -299,7 +299,7 @@ export default function MobileMenu({
             <button
               ref={backRef}
               type="button"
-              aria-label={labels.back ?? labels.title}
+              aria-label={labels.back}
               onClick={goBack}
               className="flex size-5 shrink-0 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
             >
