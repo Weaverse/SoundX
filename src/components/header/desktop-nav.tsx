@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 import { Icon } from "@/components/icon";
 import { cn } from "@/lib/cn";
@@ -41,6 +41,7 @@ export default function DesktopNav({
   let panelRefs = useRef<Record<string, HTMLDivElement | null>>({});
   let regionRef = useRef<HTMLDivElement>(null);
   let focusPanel = useRef(false);
+  let openedByHover = useRef<string | null>(null);
   let panelPrefix = useId();
   let pathname = usePathname();
   let categoryItem = menu.find((item) => item.id === categoryMenuItemId);
@@ -53,14 +54,15 @@ export default function DesktopNav({
       (item.id === helpMenuItemId && item.children.length > 0),
   );
 
-  function closeMenus() {
+  let closeMenus = useCallback(() => {
     focusPanel.current = false;
+    openedByHover.current = null;
     setActiveMenuId(null);
-  }
+  }, []);
 
   useEffect(() => {
-    if (pathname) setActiveMenuId(null);
-  }, [pathname]);
+    if (pathname) closeMenus();
+  }, [pathname, closeMenus]);
 
   useEffect(() => {
     if (activeMenuId && focusPanel.current) {
@@ -78,13 +80,13 @@ export default function DesktopNav({
         event.target instanceof Node &&
         !regionRef.current?.contains(event.target)
       ) {
-        setActiveMenuId(null);
+        closeMenus();
       }
     }
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         event.preventDefault();
-        setActiveMenuId(null);
+        closeMenus();
         if (activeMenuId) triggerRefs.current[activeMenuId]?.focus();
       }
     }
@@ -95,10 +97,10 @@ export default function DesktopNav({
         panelRefs.current[activeMenuId]?.contains(event.target) &&
         event.target.closest("a[href]")
       )
-        setActiveMenuId(null);
+        closeMenus();
     }
     function handleViewportChange() {
-      setActiveMenuId(null);
+      closeMenus();
     }
     let desktop = window.matchMedia("(min-width: 90rem)");
     document.addEventListener("pointerdown", handlePointerDown);
@@ -111,7 +113,7 @@ export default function DesktopNav({
       document.removeEventListener("click", handleClick);
       desktop.removeEventListener("change", handleViewportChange);
     };
-  }, [activeMenuId]);
+  }, [activeMenuId, closeMenus]);
 
   if (menu.length === 0) return null;
   let itemClass = cn(
@@ -160,18 +162,28 @@ export default function DesktopNav({
                     itemClass,
                     "cursor-pointer border-0 bg-transparent p-0",
                   )}
-                  onMouseEnter={() => setActiveMenuId(item.id)}
+                  onMouseEnter={() => {
+                    if (activeMenuId !== item.id) {
+                      openedByHover.current = item.id;
+                      setActiveMenuId(item.id);
+                    }
+                  }}
                   onFocus={() => {
                     if (activeMenuId !== item.id) closeMenus();
                   }}
-                  onClick={() =>
+                  onClick={(event) => {
+                    let keepOpen =
+                      event.detail > 0 && openedByHover.current === item.id;
+                    openedByHover.current = null;
+                    if (keepOpen) return;
                     setActiveMenuId((active) =>
                       active === item.id ? null : item.id,
-                    )
-                  }
+                    );
+                  }}
                   onKeyDown={(event) => {
                     if (event.key === "ArrowDown") {
                       event.preventDefault();
+                      openedByHover.current = null;
                       if (activeMenuId === item.id) {
                         panelRefs.current[item.id]
                           ?.querySelector<HTMLAnchorElement>("a[href]")

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 import { Icon } from "@/components/icon";
 import { cn } from "@/lib/cn";
@@ -32,10 +32,17 @@ export default function HelpCenterMenu({
   let triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   let panelRefs = useRef<Record<string, HTMLUListElement | null>>({});
   let focusSubmenu = useRef(false);
+  let openedByHover = useRef<string | null>(null);
+
+  let closeSubmenu = useCallback(() => {
+    focusSubmenu.current = false;
+    openedByHover.current = null;
+    setActiveItemId(null);
+  }, []);
 
   useEffect(() => {
-    if (!open) setActiveItemId(null);
-  }, [open]);
+    if (!open) closeSubmenu();
+  }, [open, closeSubmenu]);
 
   useEffect(() => {
     if (activeItemId && focusSubmenu.current) {
@@ -62,14 +69,21 @@ export default function HelpCenterMenu({
           <li
             key={item.id}
             className="relative"
-            onMouseEnter={() => setActiveItemId(hasChildren ? item.id : null)}
-            onMouseLeave={() => setActiveItemId(null)}
+            onMouseEnter={() => {
+              if (!hasChildren) {
+                closeSubmenu();
+              } else if (!expanded) {
+                openedByHover.current = item.id;
+                setActiveItemId(item.id);
+              }
+            }}
+            onMouseLeave={closeSubmenu}
             onBlur={(event) => {
               if (
                 !event.relatedTarget ||
                 !event.currentTarget.contains(event.relatedTarget)
               )
-                setActiveItemId(null);
+                closeSubmenu();
             }}
             onKeyDown={(event) => {
               if (
@@ -78,7 +92,7 @@ export default function HelpCenterMenu({
               ) {
                 event.preventDefault();
                 event.stopPropagation();
-                setActiveItemId(null);
+                closeSubmenu();
                 triggerRefs.current[item.id]?.focus();
               }
             }}
@@ -96,14 +110,19 @@ export default function HelpCenterMenu({
                     ITEM_CLASS,
                     "cursor-pointer border-0 bg-transparent p-0",
                   )}
-                  onClick={() =>
+                  onClick={(event) => {
+                    let keepOpen =
+                      event.detail > 0 && openedByHover.current === item.id;
+                    openedByHover.current = null;
+                    if (keepOpen) return;
                     setActiveItemId((active) =>
                       active === item.id ? null : item.id,
-                    )
-                  }
+                    );
+                  }}
                   onKeyDown={(event) => {
                     if (event.key === "ArrowRight") {
                       event.preventDefault();
+                      openedByHover.current = null;
                       if (expanded) {
                         panelRefs.current[item.id]
                           ?.querySelector<HTMLAnchorElement>("a[href]")
