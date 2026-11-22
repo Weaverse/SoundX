@@ -2,7 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import {
+  type CSSProperties,
+  useCallback,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
 
 import "./mobile-menu.css";
 
@@ -12,7 +19,6 @@ import { cn } from "@/lib/cn";
 import BrandMenu, { type BrandMenuItem } from "./brand-menu";
 import type { HeaderMenuItem } from "./types";
 
-// Keep the close timer aligned with --header-menu-duration in mobile-menu.css.
 const MENU_DURATION_MS = 450;
 
 const MENU_FOCUS_CLASS =
@@ -97,7 +103,7 @@ function MenuItem({
               name="chevron-up"
               size={16}
               className={cn(
-                "shrink-0 transition-transform duration-[450ms] motion-reduce:transition-none",
+                "shrink-0 transition-transform duration-[var(--header-menu-duration)] motion-reduce:transition-none",
                 expanded ? "rotate-180" : "rotate-90",
               )}
             />
@@ -255,6 +261,9 @@ export default function MobileMenu({
       id={id}
       ref={dialogRef}
       aria-labelledby={titleId}
+      style={
+        { "--header-menu-duration": `${MENU_DURATION_MS}ms` } as CSSProperties
+      }
       onCancel={(event) => {
         event.preventDefault();
         onClose();
