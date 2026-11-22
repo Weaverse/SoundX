@@ -197,7 +197,7 @@ export default function DesktopNav({
                   {item.title}
                 </Link>
               )}
-              {item.id === helpMenuItemId && item.children.length > 0 ? (
+              {dropdowns.some((dropdown) => dropdown.id === item.id) ? (
                 <div
                   id={`${panelPrefix}-${item.id}`}
                   ref={(element) => {
@@ -206,46 +206,34 @@ export default function DesktopNav({
                   aria-hidden={activeMenuId !== item.id}
                   inert={activeMenuId !== item.id}
                   data-state={activeMenuId === item.id ? "open" : "closed"}
-                  className="soundx-desktop-dropdown absolute top-full left-0 z-50 w-max pt-5"
+                  className={cn(
+                    "soundx-desktop-dropdown absolute z-50",
+                    item.id === helpMenuItemId
+                      ? "top-full left-0 w-max pt-5"
+                      : "inset-x-0 top-[calc(100%-12px)] pt-3",
+                  )}
                   onMouseEnter={() => setActiveMenuId(item.id)}
                   onMouseLeave={closeMenus}
                 >
-                  <HelpCenterMenu
-                    items={item.children}
-                    open={activeMenuId === item.id}
-                  />
+                  {item.id === helpMenuItemId ? (
+                    <HelpCenterMenu
+                      items={item.children}
+                      open={activeMenuId === item.id}
+                    />
+                  ) : item.id === categoryMenuItemId ? (
+                    <CategoryMenu
+                      groups={item.children}
+                      banner={categoryBanner}
+                    />
+                  ) : (
+                    <BrandMenu brands={brands} layout="desktop" />
+                  )}
                 </div>
               ) : null}
             </li>
           ))}
         </ul>
       </nav>
-      {dropdowns
-        .filter((item) => item.id !== helpMenuItemId)
-        .map((item) => {
-          let open = activeMenuId === item.id;
-          return (
-            <div
-              key={item.id}
-              id={`${panelPrefix}-${item.id}`}
-              ref={(element) => {
-                panelRefs.current[item.id] = element;
-              }}
-              aria-hidden={!open}
-              inert={!open}
-              data-state={open ? "open" : "closed"}
-              className="soundx-desktop-dropdown absolute inset-x-0 top-[calc(100%-12px)] z-50 pt-3"
-              onMouseEnter={() => setActiveMenuId(item.id)}
-              onMouseLeave={closeMenus}
-            >
-              {item.id === categoryMenuItemId ? (
-                <CategoryMenu groups={item.children} banner={categoryBanner} />
-              ) : (
-                <BrandMenu brands={brands} layout="desktop" />
-              )}
-            </div>
-          );
-        })}
     </div>
   );
 }
