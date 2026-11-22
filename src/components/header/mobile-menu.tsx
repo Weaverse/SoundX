@@ -15,6 +15,13 @@ import type { HeaderMenuItem } from "./types";
 // Keep the close timer aligned with --header-menu-duration in mobile-menu.css.
 const MENU_DURATION_MS = 450;
 
+const MENU_FOCUS_CLASS =
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current";
+const PARENT_TOGGLE_CLASS = cn(
+  "flex min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-end border-0 bg-transparent text-text-main",
+  MENU_FOCUS_CLASS,
+);
+
 type MobileMenuLabels = {
   title: string;
   close: string;
@@ -64,39 +71,39 @@ function MenuItem({
   let textClass = isHeading
     ? "font-body text-[16px] leading-[24px] font-semibold"
     : "font-body text-[16px] leading-[24px] font-normal";
-  let controlClass = cn(
-    "flex w-full min-w-0 items-center justify-between gap-4 text-left text-text-main",
+  let linkClass = cn(
+    "flex min-w-0 flex-1 items-center text-text-main",
     textClass,
-    isHeading ? "py-4" : "py-0",
-    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current",
+    isHeading ? "py-4" : hasChildren && "min-h-11",
+    MENU_FOCUS_CLASS,
   );
 
   return (
     <li className={cn(isHeading && "border-t border-border-subtle")}>
-      {hasChildren ? (
-        <button
-          type="button"
-          aria-expanded={expanded}
-          aria-controls={panelId}
-          aria-label={`${expanded ? labels.collapse : labels.expand} ${item.title}`}
-          onClick={() => setExpanded((value) => !value)}
-          className={cn(controlClass, "cursor-pointer border-0 bg-transparent")}
-        >
-          <span className="min-w-0 break-words">{item.title}</span>
-          <Icon
-            name="chevron-up"
-            size={16}
-            className={cn(
-              "shrink-0 transition-transform duration-[450ms] motion-reduce:transition-none",
-              expanded ? "rotate-180" : "rotate-90",
-            )}
-          />
-        </button>
-      ) : (
-        <Link href={item.href} onClick={onNavigate} className={controlClass}>
-          {item.title}
+      <div className="flex items-center gap-2">
+        <Link href={item.href} onClick={onNavigate} className={linkClass}>
+          <span className="min-w-0 wrap-break-word">{item.title}</span>
         </Link>
-      )}
+        {hasChildren && (
+          <button
+            type="button"
+            aria-expanded={expanded}
+            aria-controls={panelId}
+            aria-label={`${expanded ? labels.collapse : labels.expand} ${item.title}`}
+            onClick={() => setExpanded((value) => !value)}
+            className={PARENT_TOGGLE_CLASS}
+          >
+            <Icon
+              name="chevron-up"
+              size={16}
+              className={cn(
+                "shrink-0 transition-transform duration-[450ms] motion-reduce:transition-none",
+                expanded ? "rotate-180" : "rotate-90",
+              )}
+            />
+          </button>
+        )}
+      </div>
 
       {hasChildren ? (
         <div
@@ -362,35 +369,36 @@ export default function MobileMenu({
                 </li>
                 {menu.map((item) => (
                   <li key={item.id} className="border-t border-border-subtle">
-                    {item.children.length > 0 ? (
-                      <button
-                        ref={(element) => {
-                          rootTriggerRefs.current[item.id] = element;
-                        }}
-                        type="button"
-                        aria-controls={contentId}
-                        aria-label={`${labels.expand} ${item.title}`}
-                        onClick={() => setActivePanelId(item.id)}
-                        className="flex w-full items-center justify-between gap-4 border-0 bg-transparent py-4 text-left font-inherit text-text-main focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
-                      >
-                        <span className="min-w-0 break-words">
-                          {item.title}
-                        </span>
-                        <Icon
-                          name="chevron-up"
-                          size={16}
-                          className="shrink-0 rotate-90"
-                        />
-                      </button>
-                    ) : (
+                    <div className="flex items-center gap-2">
                       <Link
                         href={item.href}
                         onClick={onClose}
-                        className="block py-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+                        className={cn(
+                          "min-w-0 flex-1 wrap-break-word py-4",
+                          MENU_FOCUS_CLASS,
+                        )}
                       >
                         {item.title}
                       </Link>
-                    )}
+                      {item.children.length > 0 && (
+                        <button
+                          ref={(element) => {
+                            rootTriggerRefs.current[item.id] = element;
+                          }}
+                          type="button"
+                          aria-controls={contentId}
+                          aria-label={`${labels.expand} ${item.title}`}
+                          onClick={() => setActivePanelId(item.id)}
+                          className={PARENT_TOGGLE_CLASS}
+                        >
+                          <Icon
+                            name="chevron-up"
+                            size={16}
+                            className="shrink-0 rotate-90"
+                          />
+                        </button>
+                      )}
+                    </div>
                   </li>
                 ))}
               </ul>
