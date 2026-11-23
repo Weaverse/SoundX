@@ -581,3 +581,289 @@ another hostname, another store tenant path and HTTP. Main/hover browser success
 is user-reported; no fresh agent browser/Studio test was performed in this pass.
 No ProductCard, preview, quantity-control or external service changes; no commit
 or push. The quantity-control reviewer findings remain a separate task.
+
+
+## 2026-11-16 — Category dropdown presentation component
+
+Added src/components/header/category-menu.tsx at the user's request. Compared
+Forward's field-index-panel props/presentation separation and the approved
+SoundX category menu node 4709:17540. Receives Shopify-derived navigation groups
+and an optional resolved banner; no fetching or theme reads inside the panel.
+Uses a local category accent instead of coupling its purple to footer settings.
+Biome check for the new file and typecheck/GraphQL passed. Header wiring, hover
+behavior, banner settings and browser/Figma geometry verification remain pending.
+No assets downloaded, no existing header behavior changed, no commit or push.
+
+
+## 2026-11-16 — Wire desktop category disclosure
+
+ConnectedHeader resolves a configured Shopify menu item ID or exact title
+(default Shop by Category), then passes its ID through Header to DesktopNav.
+Added hover opening, delayed pointer exit to bridge header padding, button
+activation, ArrowDown focus into the panel, Escape focus restoration, outside
+click dismissal and route/viewport dismissal. Panel anchors to the header;
+existing shared chevron icon reused. Brand and Help dropdowns, mobile changes
+and category banner settings remain deferred to the next collaborative steps.
+
+Changed-file Biome checks, full lint, typecheck/GraphQL and 44 existing tests
+passed. Full format check reports the pre-existing console.log formatting in
+src/app/layout.tsx; left the user's debugging change untouched. Browser/Studio
+interaction and Figma geometry are not yet verified; production build not run
+for this intermediate step. No commit, push or external service changes.
+
+
+## 2026-11-16 — Soften category dropdown motion
+
+Kept the category chevron pointing down in both states, removing its rotation
+animation. Added component-local desktop-nav.css: opacity and a subtle 6px
+translation transition over 350ms, with delayed visibility on exit. The panel
+stays mounted so closing can animate; inert, aria-hidden and pointer-events
+prevent closed content from being focused or clicked. Reduced-motion preferences
+disable transitions. Changed-file Biome and typecheck/GraphQL passed; diff
+whitespace check passed. Browser motion review remains pending with the user.
+No commit or push.
+
+
+## 2026-11-16 — Entrance-only dropdown animation
+
+At the user's request, removed the exit fade/translation and delayed visibility.
+The 350ms entrance remains; closing has no CSS transition. The existing 180ms
+pointer grace period still bridges header padding. Updated reduced-motion rules
+for the open selector. CSS Biome and diff whitespace checks passed; no browser
+verification in this pass.
+
+
+## 2026-11-16 — Preserve a stationary close delay
+
+Clarified pointer-exit behavior: keep the panel visible and stationary for
+350ms before hiding, without an exit fade or upward translation. Re-entry
+cancels this timer. Entrance animation remains 350ms; Escape, navigation and
+outside clicks still dismiss immediately. Changed-file Biome passed.
+
+
+## 2026-11-16 — Correct duration versus close delay
+
+Removed the pointer-exit timeout entirely after the user clarified that closing
+needs animated duration rather than a delay. The dropdown now immediately
+animates its clipping boundary for 350ms, keeping content stationary and fully
+opaque. Visibility hides after the clipping transition completes; this is not
+a delay before starting the animation. A transparent 12px panel padding bridge
+spans the header bottom padding so pointer travel into the panel remains
+continuous without a close timer. Shared chevron remains down. Changed-file
+Biome and typecheck/GraphQL passed; diff whitespace check passed. Visual review
+is pending; no claim of matching prototype motion, no commit or push.
+
+
+## 2026-11-16 — Match stationary fade observed in supplied video
+
+Reviewed user-supplied video frames, including the closing sequence around
+13.05–13.30 seconds. Panel content remains positioned while the background
+shows through it. Replaced clip-path transitions with a 350ms opacity
+transition in both directions; no translation, size animation or pointer-exit
+delay. Retained visibility timing, inert/aria-hidden, reduced-motion support
+and the pointer bridge. Changed-file Biome and diff whitespace checks passed.
+User visual verification pending; no commit or push.
+
+
+## 2026-11-16 — Add brand panel for user testing
+
+Added brand-menu.tsx with desktop four-column and mobile two-column layouts.
+Connected Shopify brand children through ConnectedHeader and Header into the
+desktop dropdown. Added configurable headerBrandMenuItem title/ID binding.
+Generalized DesktopNav to share its existing disclosure/focus/escape/outside
+click behavior across category and brand panels; at most one is interactive.
+Both reuse the 350ms stationary fade and fixed downward chevron. Names, links
+and ordering are Shopify-owned; collection image querying/settings are not yet
+wired, so no fabricated images are rendered. Mobile drawer integration and
+Help Center remain separate next steps. Forward panel separation was inspected
+in this task; SoundX Figma remains the visual reference. Changed-file Biome,
+full lint, typecheck/GraphQL, 44 tests and diff whitespace checks passed. No
+production build or browser/Studio verification this pass; user testing pending.
+No commit, push or external service edits.
+
+
+## 2026-11-16 — Desktop Help Center dropdown
+
+Added help-center-menu.tsx using Shopify-provided items, including nested
+Our store links, without hardcoded shopper copy. Connected a configurable
+headerHelpMenuItem title/ID binding through the existing header. The compact
+8px-radius dropdown anchors to its trigger instead of spanning the header;
+its nested panel opens to the right, with a pointer bridge, inert closed links,
+ArrowRight/ArrowLeft and Escape focus handling. Reuses the existing shared
+opacity transition (currently 300ms in the local CSS; preserved the user's
+local value). Forward navigation/presentation separation and the earlier-read
+SoundX Figma Help Center nodes inform this implementation. No image settings
+or mobile-specific redesign in this step. Changed-file Biome, full lint,
+typecheck/GraphQL, 44 tests and diff whitespace checks passed. Browser/Studio
+interaction and production build remain unverified; no commit or push.
+
+
+## 2026-11-16 — Wire merchant category banner settings
+
+Checked the user-added category schema and completed ConnectedHeader wiring.
+Corrected the image setting type from string to {url, altText}, converted it
+to the existing CategoryMenuBanner contract, and passed the resolved banner
+through Header. Missing/blank image URL or link hides the banner. Explicit
+empty alt text remains decorative, with asset alt fallback only when absent.
+Removed categoryBanner from caller-owned ConnectedHeader props. Category
+Image now uses unoptimized, matching existing merchant-uploaded header logo
+behavior without widening Next remotePatterns. Shopify query unchanged.
+Changed-file Biome, typecheck/GraphQL and diff whitespace checks passed.
+Studio upload/rendering verification remains pending with the user. No build,
+commit, push or external changes this pass.
+
+
+## 2026-11-16 — Repair saved category banner wiring
+
+Re-read the user-edited files after a report that the Studio-selected banner
+was not visible. Saved ConnectedHeader had reverted the image type to string
+and constructed categoryBanner without passing it to Header. Restored the
+image object type, caller prop omission and categoryBanner prop. Schema names
+and downstream Header/DesktopNav/CategoryMenu wiring match; both image URL and
+banner link remain required. Biome, typecheck/GraphQL and diff whitespace passed.
+Live Studio values and actual browser rendering not inspected in this pass.
+
+
+## 2026-11-16 — Studio image bindings for four brand cards
+
+Added four generic brand image slots to Header theme settings, each with a
+Shopify item ID/exact-title selector, image picker and optional alt text.
+Slots are not hardcoded to brand names and do not determine menu ordering.
+ConnectedHeader merges images into Shopify brand children by ID first, then
+exact title. Missing bindings/images preserve the text link; explicit empty
+alt text remains decorative. BrandMenu uses unoptimized for Studio-uploaded
+images, matching category/logo behavior. Forward Header theme setting and
+presentation separation patterns were reviewed; four image slots are SoundX
+scope for the approved four-card design. No mobile drawer changes or uploaded
+assets. Changed-file Biome, typecheck/GraphQL and diff whitespace checks passed.
+User Studio image selection and browser visual testing pending; no build,
+commit, push or external changes.
+
+
+## 2026-11-16 — Desktop dropdown geometry alignment
+
+Re-read high-fidelity category/brand/help Figma contexts and screenshots.
+Corrected the category content width to 1440px at 1728px viewport, removing
+internal 32px horizontal padding and retaining a 32px edge gutter at narrower
+desktop widths. Split category heading/link classes to avoid conflicting
+utilities: headings 20/30px weight 500 purple, links 14/21px weight 400. Category
+minimum panel height is 360px. Brand container now uses the 1416px inner grid
+within 1440px, with 24px gaps. Help widths adjusted to 186px and 139px. Desktop
+default wordmark uses SOUND weight 900 and X weight 400 at 34px; mobile wordmark
+is unchanged. Merchant uploads/settings and existing local 300ms fade retained.
+
+Browser checks at 1728px measured category width 1440, column width 236, panel
+height 360 and loaded banner 400x288 radius 20; heading computed as 20/30px,
+weight 500, rgb(52,40,94). Brand cards measured 336x212.5, gap 24, caption gap
+16 and radius 16; all four merchant images loaded. Help measured 186x111 and
+submenu 139x111. At 1440px brand cards measured 320px and fit horizontally.
+Checks used keyboard activation because hover-then-click toggle remains a
+known interaction issue outside this CSS pass. Browser viewport reset. Final
+wordmark typography change was checked by Biome, not visually rechecked.
+Changed-header Biome, typecheck/GraphQL, 44 tests and diff whitespace passed.
+Production build not run. Mobile brand/radius work remains deferred; no commit
+or push.
+
+
+## 2026-11-16 — Mobile/tablet dropdown layouts
+
+Read Figma nodes 1279:14741, 4735:18368, 4735:18274 and 1279:14887.
+The new category node supplies the previously deferred mobile category layout.
+Root/group labels now use body font 16/24px semibold, leaf links UI font
+14/21px regular with 8px indents and spacing. Drawer title is 20/30px UI
+medium; right corners 16px, left corners square. Category groups expand
+independently; Brand reuses shared merchant images in a 2-column grid.
+Help and Our store retain nested accordion links because no separate expanded
+Help mockup was supplied. All submenus animate height over 350ms, honor reduced
+motion and make collapsed descendants inert. Whole parent rows are disclosure
+buttons; leaf links navigate and dismiss. BrandMenu adds onNavigate for mobile.
+Forward modal/focus behavior was consulted; the existing native dialog, body
+lock, focus restore and exit animation were preserved. Desktop CSS unchanged.
+
+Browser verification: at 430x932, drawer width 360, corners 0/16/16/0, heading
+20px, Brand grid 158px+158px with 12px horizontal/16px vertical gaps and
+119px-high loaded images (all four). Category Headphones and Speakers remained
+open together; child links computed Inter 14/21px with 8px indentation. Help
+and Our store exposed all Shopify children. Selecting About Us closed dialog
+and restored body overflow. At 834x1112 drawer measured 360x1112, Brand grid
+retained two columns, and Escape closed/restored overflow. Viewport reset.
+
+Known discrepancy retained: Shopify Main menu includes All Collections, which
+is not shown in the supplied mobile mockup; no authored menu entry was silently
+removed. Images are merchant-managed; no Figma demo assets were downloaded.
+Changed-file Biome, full lint, typecheck/GraphQL, 44 existing tests and diff
+whitespace passed. Production build and Studio edit/publish not run this pass.
+No commit or push.
+
+
+## 2026-11-16 — Designer-directed mobile drill-down panels
+
+Supersedes the earlier root-inline accordion implementation. Designer guidance
+via the user: Category, Brand and Help Center each replace the root menu view
+inside one dialog. Added a back control, selected parent title and focus
+restoration to the originating root button. Root parents with children enter
+a panel; leaf items navigate; third-level children remain accordions within
+the selected panel. Brand uses the image grid when its children are leaves,
+otherwise falls back to the same hierarchy-aware list. No new modal or
+Shopify query. Contact information remains outside the changing view. Closing
+resets to the root menu. Added Studio-owned back button label. Category leaf
+typography follows latest node 4735:18360 (body 16/24px regular). Panel entry
+uses a subtle 350ms fade with reduced-motion support; accordion animation kept.
+
+Verified in browser at 430x932: Category replaces root menu, third-level links
+expand, Back restores root and focus, Brand shows four leaf links/images,
+Help exposes direct links and Our store accordion. Close and reopen resets
+the root. At 834x1112 the category panel is inside exactly one 360x1112 dialog
+with contact retained; Escape closes and restores body overflow. Viewport reset.
+Changed-file Biome, full lint, typecheck/GraphQL, 44 tests and diff whitespace
+passed. Production build and Studio publish not run; no commit or push.
+
+
+## 2026-11-16 — Newly supplied mobile Help Center design
+
+Read high-fidelity context and screenshot for Figma node 4804:18496.
+Existing Help panel structure matches the updated hierarchy: FAQ and refund
+items are leaf links; Our Store opens third-level links. Updated nested mobile
+leaf typography to body font 16/24px regular, matching Open Sans in Figma;
+parent labels remain 16/24px semibold, gaps 8px and indent 8px. Retained
+Shopify titles/casing and Store locations rather than silently removing an
+authored child omitted from the mockup. Desktop unchanged. Changed-file Biome,
+typecheck/GraphQL and diff whitespace passed. No fresh browser visual check,
+production build, commit or push in this small typography pass.
+
+
+## 2026-11-16 — Slower mobile navigation motion
+
+User requested less abrupt side-dropdown motion. Increased drawer entrance/
+exit and its matching JS close timer from 300ms to 450ms. Accordion height,
+chevron rotation and panel entry fade now also use 450ms. Changed drawer and
+accordion easing to cubic-bezier(0.25,0.1,0.25,1), avoiding the earlier fast
+initial progress; panel fade uses ease-in-out. Reduced-motion behavior kept;
+desktop untouched. Changed-file Biome and diff whitespace checks passed.
+Perceived motion review remains pending with the user; no build/commit/push.
+
+
+## 2026-11-16 — Pre-commit verification
+
+On feat/design-system-layout, no staged changes. Full lint, typecheck/GraphQL,
+44 tests and diff whitespace passed. Full format check fails only on the
+user-added Main-menu console.log semicolon in src/app/layout.tsx; not changed
+in this verification pass. Initial sandbox production build made no progress
+at compile and was interrupted; rerun outside sandbox passed (7 routes).
+Unrelated preview, product fixtures, TextBlock/test and image-banner work must
+remain out of the header commit. Existing desktop hover/click toggle behavior
+remains noted. No commit or push was performed; prior PR was already merged
+per the user, so this follow-up needs a new review PR.
+
+
+## 2026-11-22 — Header navigation PR review
+
+- Updated the spec to record the desktop and mobile navigation included in
+  PR #18, list the changed desktop files and refresh the spec date.
+- Prior PR checks verified desktop Tab order, focus restoration and
+  hover-then-click behavior, and mobile parent navigation and Back focus.
+- The Back-label change passed format check, lint, typecheck and all
+  44 tests. Production build passed on retry after the Next.js 16.4.4
+  security notice. A local Chrome fixture confirmed the default and custom
+  Back labels and focus restoration using simulated Studio settings.
+- Live Studio publishing and a full cross-browser visual pass are pending.
